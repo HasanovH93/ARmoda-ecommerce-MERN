@@ -1,22 +1,25 @@
-import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import Routes from './Routes';
-import Page from './components/Page';
+import logo from './logo.svg';
+import './App.css';
 
-import 'react-lazy-load-image-component/src/effects/blur.css';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import 'react-image-lightbox/style.css';
-import 'aos/dist/aos.css';
-
-const App = () => {
+function App() {
   return (
-    <Page>
-      <BrowserRouter>
-        <Routes />
-      </BrowserRouter>
-    </Page>
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
   );
-};
+}
 
 export default App;
