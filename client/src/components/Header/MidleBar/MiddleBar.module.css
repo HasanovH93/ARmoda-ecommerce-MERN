@@ -1,0 +1,27 @@
+.middleBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  color: rgb(0, 0, 0);
+}
+
+.logo {
+  font-size: 0.7rem;
+}
+
+.searchBar input {
+  padding: 0.25rem;
+  width: 500px;
+  border: 1px solid rgb(231, 228, 228);
+}
+
+.iconGroup {
+  display: flex;
+  gap: 1rem;
+}
+
+.icon {
+  color: rgb(54, 53, 53);
+  font-size: 1rem;
+}
