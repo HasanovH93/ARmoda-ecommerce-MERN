@@ -10,10 +10,15 @@
   font-size: 0.7rem;
 }
 
+.searchBar {
+  position: relative;
+}
+
 .searchBar input {
   padding: 0.25rem;
   width: 500px;
   border: 1px solid rgb(231, 228, 228);
+  padding-right: 30px;
 }
 
 .iconGroup {
@@ -23,5 +28,13 @@
 
 .icon {
   color: rgb(54, 53, 53);
-  font-size: 1rem;
+  font-size: 1.2rem;
+}
+
+.searchIcon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
 }

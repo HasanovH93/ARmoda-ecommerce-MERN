@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./TopBar.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -37,7 +36,6 @@ const TopBar = () => {
         Free Shipping This Week Order Over - $55
       </div>
       <div className={styles.dropdowns}>
-        {/* Add your languages and currencies options */}
         <select className={styles.select}>
           <option>EN</option>
           <option>ES</option>

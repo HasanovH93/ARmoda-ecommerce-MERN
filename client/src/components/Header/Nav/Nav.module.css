@@ -1,20 +1,52 @@
 .bottomBar {
-  background-color: #ffffff;
-  padding: 0.5rem 0;
+  background-color: #f8f8f8;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
 .nav {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
 }
 
-.nav ul {
-  list-style-type: none;
+.toggleButton {
+  display: none;
+  background-color: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.menu {
+  list-style: none;
   display: flex;
   gap: 1rem;
 }
 
-.nav a {
-  text-decoration: none;
-  color: rgb(0, 0, 0);
+.menu.open {
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 768px) {
+  .toggleButton {
+    display: block;
+  }
+
+  .menu {
+    display: none;
+  }
+
+  .menu.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background-color: #f8f8f8;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 10;
+  }
 }

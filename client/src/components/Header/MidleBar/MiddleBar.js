@@ -1,17 +1,17 @@
 import styles from "./MiddleBar.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faHeart } from "@fortawesome/free-regular-svg-icons"; // Import regular icons
-import { faBagShopping } from "@fortawesome/free-solid-svg-icons"; // Import solid icons
+import { faUser, faHeart } from "@fortawesome/free-regular-svg-icons";
+import { faBagShopping, faSearch } from "@fortawesome/free-solid-svg-icons";
 
-// ... other imports ...
 const MiddleBar = () => {
   return (
     <div className={styles.middleBar}>
       <div className={styles.logo}>
-        <h1>Your Store</h1>
+        <h1>ARmoda</h1>
       </div>
       <div className={styles.searchBar}>
         <input type="text" placeholder="Search..." />
+        <FontAwesomeIcon icon={faSearch} className={styles.searchIcon} />
       </div>
       <div className={styles.iconGroup}>
         <a href="#">
