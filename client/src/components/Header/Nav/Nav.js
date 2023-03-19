@@ -9,30 +9,20 @@ const Nav = () => {
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
-
+  const navClass = menuOpen
+    ? `${styles.topnav} ${styles.responsive}`
+    : styles.topnav;
   return (
-    <div className={styles.bottomBar}>
-      <nav className={styles.nav}>
-        <button className={styles.toggleButton} onClick={toggleMenu}>
-          <FontAwesomeIcon icon={faBars} />
-        </button>
-        <ul
-          className={`${styles.menu} ${menuOpen ? styles.open : styles.menu}`}
-        >
-          <li>
-            <a href="/">Home</a>
-          </li>
-          <li>
-            <a href="/products">Products</a>
-          </li>
-          <li>
-            <a href="/cart">Cart</a>
-          </li>
-          <li>
-            <a href="/signin">Sign In</a>
-          </li>
-        </ul>
-      </nav>
+    <div className={navClass}>
+      <button onClick={toggleMenu} className={styles.icon}>
+        <FontAwesomeIcon icon={faBars} />
+      </button>
+      <a href="#home" className="active">
+        Home
+      </a>
+      <a href="#news">News</a>
+      <a href="#contact">Contact</a>
+      <a href="#about">About</a>
     </div>
   );
 };
