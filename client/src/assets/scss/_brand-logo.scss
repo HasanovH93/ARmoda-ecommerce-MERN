@@ -1,0 +1,14 @@
+/*------- 14. Brand logo style  -------*/
+
+.brand-logo-active {
+  .single-brand-logo {
+    text-align: center;
+    img {
+      filter: grayscale(100%);
+      transition: all 0.5s ease 0s;
+    }
+    &:hover img {
+      filter: grayscale(0%);
+    }
+  }
+}

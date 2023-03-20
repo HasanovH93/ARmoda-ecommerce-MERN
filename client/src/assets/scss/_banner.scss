@@ -1,0 +1,129 @@
+/*----- 9. Banner style  -------*/
+
+.single-banner {
+  position: relative;
+
+  overflow: hidden;
+  a {
+    img {
+      width: 100%;
+
+      transition: all 0.5s ease 0s;
+      transform: scale(1);
+    }
+  }
+  &:hover img {
+    transform: scale(1.2);
+  }
+  .banner-content {
+    position: absolute;
+    top: 40px;
+    left: 36px;
+
+    content: "";
+    @media #{$lg-layout} {
+      top: 20px;
+      left: 20px;
+    }
+    @media #{$md-layout} {
+      top: 10px;
+      left: 15px;
+    }
+    @media #{$xs-layout} {
+      top: 50%;
+      left: 15px;
+
+      transform: translateY(-50%);
+    }
+    h3 {
+      font-family: "Cormorant Garamond";
+      font-size: 36px;
+      font-weight: 600;
+
+      margin: 0;
+
+      color: #915342;
+      @media #{$md-layout} {
+        font-size: 27px;
+      }
+      @media #{$xs-layout} {
+        font-size: 30px;
+      }
+    }
+    h4 {
+      font-family: "Cormorant Garamond";
+      font-size: 18px;
+      font-weight: 600;
+
+      margin: 3px 0 58px;
+
+      color: #010101;
+      @media #{$lg-layout} {
+        margin: 3px 0 25px;
+      }
+      @media #{$lg-layout} {
+        margin: 3px 0 15px;
+      }
+      @media #{$md-layout} {
+        margin: 3px 0 8px;
+      }
+      @media #{$xs-layout} {
+        margin: 3px 0 20px;
+      }
+      span {
+        font-size: 20px;
+        line-height: 1;
+
+        position: relative;
+        top: 2px;
+
+        display: inline-block;
+
+        margin: 0 0 0 2px;
+
+        color: #935644;
+      }
+    }
+    a {
+      font-size: 14px;
+
+      display: inline-block;
+
+      width: 28px;
+      height: 28px;
+
+      text-align: center;
+
+      color: #97584a;
+      border: 2px solid #97584a;
+      border-radius: 100%;
+      i {
+        line-height: 25px;
+      }
+      &:hover {
+        color: $theme-color;
+        border: 2px solid $theme-color;
+      }
+    }
+    &.banner-pink {
+      a {
+        color: #ed59a0;
+        border: 2px solid #ed59a0;
+        &:hover {
+          color: $theme-color;
+          border: 2px solid $theme-color;
+        }
+      }
+    }
+
+    &--style2 {
+      h3 {
+        color: #1c1c1c;
+      }
+      a {
+        color: #c61a32;
+        border-color: #c61a32;
+      }
+    }
+  }
+}
