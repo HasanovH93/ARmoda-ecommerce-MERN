@@ -37,68 +37,16 @@
       height: 45px;
       padding: 2px 20px;
 
-//background: rgba(0, 0, 0, 0) url("../../assets/img/icon-img/select.png") no-repeat scroll right 18px center;
-
       cursor: pointer;
 
       color: #333;
       border: 1px solid #e6e6e6;
 
       -webkit-appearance: none;
-         -moz-appearance: none;
+      -moz-appearance: none;
     }
   }
-  .checkout-account {
-    display: flex;
-    align-items: center;
-    input {
-      display: inline-block;
-      float: left;
 
-      width: 10px;
-      height: 10px;
-
-      border: 1px solid #9fa0a2;
-    }
-    span {
-      font-weight: 400;
-
-      margin: 0 0 0 12px;
-
-      color: #333;
-    }
-  }
-  .checkout-account-toggle {
-    input {
-      font-size: 14px;
-
-      margin: 0 0 20px;
-      padding-right: 10px;
-      padding-left: 20px;
-
-      color: #333;
-      border: 1px solid #e6e6e6;
-      background: transparent none repeat scroll 0 0;
-    }
-    button.checkout-btn {
-      font-weight: 500;
-
-      z-index: 9;
-
-      padding: 10px 30px;
-
-      cursor: pointer;
-      text-transform: uppercase;
-
-      color: #fff;
-      border: medium none;
-      border-radius: 50px;
-      background-color: $theme-color;
-      &:hover {
-        background-color: #333;
-      }
-    }
-  }
   .additional-info-wrap {
     h4 {
       font-size: 16px;
@@ -123,9 +71,6 @@
         background: transparent none repeat scroll 0 0;
       }
     }
-  }
-  .different-address {
-    display: none;
   }
 }
 
@@ -229,39 +174,7 @@
       }
     }
   }
-  .payment-accordion {
-    margin: 0 0 16px;
-    &:last-child {
-      margin: 0 0 0;
-    }
-    h4 {
-      font-size: 16px;
 
-      margin: 0;
-
-      color: #212121;
-      a {
-        position: relative;
-
-        display: block;
-
-        color: #212121;
-        &:hover {
-          color: $theme-color;
-        }
-      }
-    }
-    .panel-body {
-      padding: 5px 0 0 0;
-      p {
-        font-size: 14px;
-
-        padding: 0 0 0 10px;
-
-        color: #333;
-      }
-    }
-  }
   .place-order > a,
   .place-order > button {
     font-weight: 500;

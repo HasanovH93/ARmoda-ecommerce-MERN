@@ -8,16 +8,9 @@ const HomeKidsFashion = lazy(() => import("./pages/home/HomeKidsFashion"));
 // shop pages
 const ShopGridStandard = lazy(() => import("./pages/shop/ShopGridStandard"));
 
-
 // product pages
 const ProductTabLeft = lazy(() =>
   import("./pages/shop-product/ProductTabLeft")
-);
-
-// blog pages
-const BlogStandard = lazy(() => import("./pages/blog/BlogStandard"));
-const BlogDetailsStandard = lazy(() =>
-  import("./pages/blog/BlogDetailsStandard")
 );
 
 // other pages
@@ -64,7 +57,6 @@ const App = () => {
               path={process.env.PUBLIC_URL + "/shop-grid-standard"}
               element={<ShopGridStandard />}
             />
-          
 
             {/* Shop product pages */}
             <Route
@@ -73,14 +65,14 @@ const App = () => {
             />
 
             {/* Blog pages */}
-            <Route
+            {/* <Route
               path={process.env.PUBLIC_URL + "/blog-standard"}
               element={<BlogStandard />}
             />
             <Route
               path={process.env.PUBLIC_URL + "/blog-details-standard"}
               element={<BlogDetailsStandard />}
-            />
+            /> */}
 
             {/* Other pages */}
             <Route
