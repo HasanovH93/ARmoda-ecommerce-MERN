@@ -65,7 +65,7 @@ authController.get("/profile", hasUser(), async (req, res) => {
     res.status(401).send({ message: error.message });
   }
 });
-authController.put("/profile", s3UploadImg(),hasUser(), async (req, res) => {
+authController.put("/profile", s3UploadImg(), hasUser(), async (req, res) => {
   try {
     const { username, email } = req.body;
     if (req.files.length > 0) {

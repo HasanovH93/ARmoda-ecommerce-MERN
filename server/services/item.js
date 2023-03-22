@@ -6,7 +6,11 @@ async function getAll(skip, limit) {
 }
 
 async function getLastFour() {
-  return await Hotel.find({}).populate("owner").sort({ date: -1 }).limit(4).lean();
+  return await Hotel.find({})
+    .populate("owner")
+    .sort({ date: -1 })
+    .limit(4)
+    .lean();
 }
 
 async function getByUserId(userId) {
@@ -18,6 +22,7 @@ async function getHotelById(id) {
 }
 
 async function create(item) {
+
   const newHotel = new Hotel(item);
   return await newHotel.save();
 }
@@ -38,7 +43,6 @@ async function deleteById(id) {
 }
 
 async function likeHotel(userId, hotelId) {
-
   const user = await User.findById(userId);
   let likes = user.likedHotels;
   likes.push(hotelId);
@@ -67,7 +71,7 @@ async function getByIdHotels(id) {
   return user;
 }
 
-async function search(query){
+async function search(query) {
   const data = await Hotel.find(query);
   return data;
 }
@@ -83,5 +87,5 @@ module.exports = {
   likeHotel,
   updateById,
   getByIdHotels,
-  search
+  search,
 };

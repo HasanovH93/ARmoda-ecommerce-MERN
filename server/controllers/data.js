@@ -10,7 +10,6 @@ const {
   getByIdHotels,
   search,
 } = require("../services/item");
-const { getById } = require("../services/user");
 const { parseError } = require("../util/parser");
 const { s3UploadImg } = require("../middlewares/imagesUpload");
 const { createBooking, getByIdHReservations } = require("../services/booking");
@@ -22,22 +21,34 @@ dataController.get("/last-hotels", async (req, res) => {
   res.status(200).send({ latestHotels: hotels });
 });
 
+let currentSKU = 1;
+
+const getNextSKU = () => {
+  const sku = currentSKU.toString().padStart(4, "0");
+  currentSKU += 1;
+  return sku;
+};
+
 dataController.post("/create", s3UploadImg(), hasUser(), async (req, res) => {
+  console.log(req.body);
   try {
     req.body = JSON.parse(JSON.stringify(req.body));
 
     req.body.imageUrls = req.files.map((img) => img.location);
 
+    const sku = await getNextSKU();
+    const oneWeekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+    const createdAt = new Date();
+    const variation = JSON.parse(req.body.variations);
+    console.log(variation);
     const data = {
-      hotelName: req.body.hotelName,
-      roomType: req.body.roomType,
-      location: req.body.location,
-      address: req.body.address,
-      stars: Number(req.body.stars),
+      sku,
+      productName: req.body.productName,
       description: req.body.description,
       price: Number(req.body.price),
       imageUrls: req.body.imageUrls,
-      facilities: req.body.facilities,
+      new: createdAt > oneWeekAgo,
+      variation,
     };
 
     if (Object.values(data).some((v) => !v || v === null)) {
@@ -46,14 +57,6 @@ dataController.post("/create", s3UploadImg(), hasUser(), async (req, res) => {
     if (req.body.imageUrls.length < 1) {
       throw new Error("At least one Image is required!");
     }
-
-    data.date = new Date().toDateString();
-    data.owner = req.user._id;
-
-    const id = req.user._id;
-    const user = await getById(id);
-    data.ownerImage = user.imageUrl;
-    data.ownerEmail = user.email;
 
     const createdData = await create(data);
 
@@ -137,6 +140,7 @@ dataController.put("/edit/:id", s3UploadImg(), async (req, res) => {
       throw new Error("Unauthorized");
     }
     const data = {
+      sku: getNextSKU(),
       hotelName: req.body.hotelName,
       roomType: req.body.roomType,
       location: req.body.location,
@@ -170,7 +174,7 @@ dataController.post("/search", async (req, res) => {
       if (value !== undefined && value !== null) {
         if (key == "price") {
           accObj[key] = { $lte: Number(value) };
-        }else if(key == "stars"){
+        } else if (key == "stars") {
           accObj[key] = { $gte: Number(value) };
         } else {
           accObj[key] = value;
@@ -186,29 +190,31 @@ dataController.post("/search", async (req, res) => {
   }
 });
 
-dataController.post('/reservation', async (req,res) => {
+dataController.post("/reservation", async (req, res) => {
   try {
-
     const data = {
-      checkIn : req.body.checkIn.split('T')[0],
-      checkOut: req.body.checkOut.split('T')[0],
-      guests : req.body.guests
-    }
-    console.log(data)
-    if (Object.values(data).some((v) => !v || v === '')) {
+      checkIn: req.body.checkIn.split("T")[0],
+      checkOut: req.body.checkOut.split("T")[0],
+      guests: req.body.guests,
+    };
+    console.log(data);
+    if (Object.values(data).some((v) => !v || v === "")) {
       throw new Error(`All fields are required`);
     }
 
-    data.hotel = req.body.hotel
+    data.hotel = req.body.hotel;
 
-    const createdReservation = await createBooking(data,req.user._id);
-    console.log(createdReservation)
-    res.status(200).send({message: "Successfully booked this hotel. " ,createdReservation})
+    const createdReservation = await createBooking(data, req.user._id);
+    console.log(createdReservation);
+    res.status(200).send({
+      message: "Successfully booked this hotel. ",
+      createdReservation,
+    });
   } catch (error) {
     const message = parseError(error);
-    res.status(400).send({message})
+    res.status(400).send({ message });
   }
-})
+});
 
 dataController.get("/reservations", async (req, res) => {
   try {
