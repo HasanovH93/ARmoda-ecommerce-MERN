@@ -6,7 +6,7 @@ const Sidebar = () => {
     <div className="sidebar">
       <ul>
         <li>
-          <Link to="/admin-panel/dashboard">
+          <Link to="/dashboard">
             <i className="fa fa-tachometer-alt"></i>
             <span>Dashboard</span>
           </Link>
@@ -18,7 +18,7 @@ const Sidebar = () => {
           </Link>
         </li>
         <li>
-          <Link to="/admin-panel/add-product">
+          <Link to="/dashboard/add-product">
             <i className="fa fa-plus"></i>
             <span>Add Product</span>
           </Link>

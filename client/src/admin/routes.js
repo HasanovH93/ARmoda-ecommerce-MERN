@@ -1,15 +1,17 @@
 import React from "react";
+import AddProduct from "./components/AddProduct";
 import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
 
 const routes = [
   {
     path: "/admin-panel",
-    renderer: (params = {}) => <Login {...params} />,
+    element: <Login />,
   },
   {
     path: "/dashboard",
-    renderer: (params = {}) => <Dashboard {...params} />,
+    element: <Dashboard />,
+    children: [{ path: "add-product", element: <AddProduct /> }],
   },
 ];
 
