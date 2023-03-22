@@ -1,5 +1,4 @@
 import React from "react";
-import ImageDropzone from "./ImageDropzone";
 
 const VariationForm = ({ variations, setVariations }) => {
   const addVariation = () => {
@@ -11,10 +10,9 @@ const VariationForm = ({ variations, setVariations }) => {
       const updatedVariations = [...prevVariations];
       const updatedVariation = { ...updatedVariations[index] };
 
-      if (field === "color") {
-        updatedVariation[field] = value;
-      } else if (field === "image") {
-        updatedVariation[field] = value;
+      if (field === "color" || field.startsWith("stock")) {
+        const fieldName = field.replace("stock-", ""); // remove "stock-" prefix
+        updatedVariation[fieldName] = value;
       } else if (field === "size") {
         const sizeIndex = updatedVariation.size.findIndex(
           (sizeObj) => sizeObj.name === value
@@ -22,34 +20,14 @@ const VariationForm = ({ variations, setVariations }) => {
 
         if (checked) {
           if (sizeIndex === -1) {
-            updatedVariation.size.push({ name: value, stock: "" });
+            updatedVariation.size.push({ name: value, stock: 0 });
           }
         } else {
           if (sizeIndex !== -1) {
             updatedVariation.size.splice(sizeIndex, 1);
           }
         }
-      } else if (field.startsWith("stock")) {
-        const sizeName = field.split("-")[1];
-        const sizeObjIndex = updatedVariation.size.findIndex(
-          (sizeObj) => sizeObj.name === sizeName
-        );
-
-        if (sizeObjIndex === -1 && value) {
-          updatedVariation.size.push({ name: sizeName, stock: value });
-        } else if (sizeObjIndex !== -1 && value) {
-          updatedVariation.size[sizeObjIndex].stock = value;
-        } else if (sizeObjIndex !== -1 && !value) {
-          updatedVariation.size.splice(sizeObjIndex, 1);
-        }
       }
-
-      // Remove "stock" keys with empty values
-      updatedVariation.size.forEach((sizeObj) => {
-        if (sizeObj.stock === "") {
-          delete sizeObj.stock;
-        }
-      });
 
       updatedVariations[index] = updatedVariation;
       return updatedVariations;
@@ -116,10 +94,11 @@ const VariationForm = ({ variations, setVariations }) => {
           ))}
           <label>
             Image URL:
-            <ImageDropzone
-              product={variation}
-              setProduct={(updatedProduct) =>
-                handleInputChange(index, "image", updatedProduct.image)
+            <input
+              type="text"
+              value={variation.image}
+              onChange={(e) =>
+                handleInputChange(index, "image", parseInt(e.target.value))
               }
             />
           </label>

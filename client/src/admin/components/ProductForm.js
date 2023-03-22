@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import ImageDropzone from "./ImageDropzone";
 import api from "../../api";
-import CheckboxGroup from "./CheckBoxGroup";
 import VariationForm from "./VariationForm";
 
 const ProductForm = () => {
@@ -45,19 +44,6 @@ const ProductForm = () => {
       console.error("Error while adding hotel:", error);
     }
   };
-  const handleCheckboxChange = (type, e) => {
-    const { value, checked } = e.target;
-    setProduct((prevProduct) => {
-      const updatedArray = checked
-        ? [...prevProduct[type], value]
-        : prevProduct[type].filter((item) => item !== value);
-
-      return {
-        ...prevProduct,
-        [type]: updatedArray,
-      };
-    });
-  };
 
   const [variations, setVariations] = useState([{ color: "", size: [] }]);
 
@@ -94,22 +80,6 @@ const ProductForm = () => {
         />
       </label>
 
-      {/* <label>
-        Sizes:
-        <CheckboxGroup
-          type="sizes"
-          options={["S", "M", "L"]}
-          handleCheckboxChange={handleCheckboxChange}
-        />
-      </label>
-      <label>
-        Colors:
-        <CheckboxGroup
-          type="colors"
-          options={["Red", "Blue", "Green"]}
-          handleCheckboxChange={handleCheckboxChange}
-        />
-      </label> */}
       <VariationForm variations={variations} setVariations={setVariations} />
       <ImageDropzone product={product} setProduct={setProduct} />
       <button type="submit">Add Product</button>
