@@ -1,12 +1,12 @@
 const { Schema, model, Types } = require("mongoose");
 
 const hotelSchema = new Schema({
-  productName: {
+  name: {
     type: String,
     required: true,
     minlength: [3, "Hotel Name must be at least 4 characters long"],
   },
-  description: {
+  fullDescription: {
     type: String,
     required: true,
     minlength: [10, "Description must be at least 10 characters long"],
@@ -16,21 +16,26 @@ const hotelSchema = new Schema({
     required: true,
     min: [0.01, "Price must be a positive number"],
   },
-  imageUrls: [
+  image: [
     { type: String, required: [true, "At least one image is required!"] },
   ],
   sku: { type: Number },
   new: { type: Boolean },
-  sizes: {
-    type: [String],
-    required: true,
-    minlength: [1, "At least one size is required"],
-  },
-  colors: {
-    type: [String],
-    required: true,
-    minlength: [1, "At least one color is required"],
-  },
+  rating: { type: Number },
+  variation: [
+    {
+      color: String,
+      image: String,
+      size: [
+        {
+          name: String,
+          stock: Number,
+        },
+      ],
+    },
+  ],
+  category: [{ type: String }],
+  shortDescription: { type: String },
 });
 
 const Hotel = model("Hotel", hotelSchema);

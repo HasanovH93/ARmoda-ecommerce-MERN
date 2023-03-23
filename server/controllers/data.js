@@ -40,15 +40,18 @@ dataController.post("/create", s3UploadImg(), hasUser(), async (req, res) => {
     const oneWeekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
     const createdAt = new Date();
     const variation = JSON.parse(req.body.variations);
-    console.log(variation);
+
     const data = {
       sku,
-      productName: req.body.productName,
-      description: req.body.description,
+      name: req.body.productName,
       price: Number(req.body.price),
-      imageUrls: req.body.imageUrls,
+      image: req.body.imageUrls,
       new: createdAt > oneWeekAgo,
       variation,
+      category: ["1", "2"],
+      fullDescription: req.body.description,
+      shortDescription: "dadadadada",
+      rating: 5,
     };
 
     if (Object.values(data).some((v) => !v || v === null)) {
@@ -73,7 +76,7 @@ dataController.post("/create", s3UploadImg(), hasUser(), async (req, res) => {
 dataController.get("/all-hotels", async (req, res) => {
   try {
     const page = parseInt(req.query.page);
-    const limit = 3;
+    const limit = 50;
     const skip = parseInt(page * limit);
     const data = await getAll(skip, limit);
     res.status(200).json(data);
