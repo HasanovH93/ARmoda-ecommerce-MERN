@@ -43,8 +43,6 @@ const VariationForm = ({ variations, setVariations }) => {
           updatedVariation.size.splice(sizeObjIndex, 1);
         }
       }
-
-      // Remove "stock" keys with empty values
       updatedVariation.size.forEach((sizeObj) => {
         if (sizeObj.stock === "") {
           delete sizeObj.stock;
@@ -68,52 +66,63 @@ const VariationForm = ({ variations, setVariations }) => {
               }
             >
               <option value="">Select a color</option>
-              <option value="Red">Red</option>
-              <option value="Blue">Blue</option>
-              <option value="Green">Green</option>
-              <option value="Yellow">Yellow</option>
-              <option value="Black">Black</option>
+              <option value="red">red</option>
+              <option value="blue">blue</option>
+              <option value="green">green</option>
+              <option value="black">Black</option>
+              <option value="white">white</option>
             </select>
           </label>
           <div className="sizes">
             Sizes:
-            {["S", "M", "L", "XL"].map((size) => (
-              <label key={size}>
-                <input
-                  type="checkbox"
-                  value={size}
-                  checked={variation.size.some(
-                    (sizeObj) => sizeObj.name === size
+            {["x", "m", "xxl", "s"].map((size) => {
+              const isChecked = variation.size.some(
+                (sizeObj) => sizeObj.name === size
+              );
+              return (
+                <div key={size}>
+                  <label>
+                    <input
+                      type="checkbox"
+                      value={size}
+                      checked={isChecked}
+                      onChange={(e) =>
+                        handleInputChange(
+                          index,
+                          "size",
+                          e.target.value,
+                          e.target.checked
+                        )
+                      }
+                    />
+                    {size}
+                  </label>
+                  {isChecked && (
+                    <label>
+                      Stock for {size}:
+                      <input
+                        type="number"
+                        value={
+                          (
+                            variation.size.find(
+                              (sizeObj) => sizeObj.name === size
+                            ) || { stock: 0 }
+                          ).stock
+                        }
+                        onChange={(e) =>
+                          handleInputChange(
+                            index,
+                            `stock-${size}`,
+                            e.target.value
+                          )
+                        }
+                      />
+                    </label>
                   )}
-                  onChange={(e) =>
-                    handleInputChange(
-                      index,
-                      "size",
-                      e.target.value,
-                      e.target.checked
-                    )
-                  }
-                />
-                {size}
-              </label>
-            ))}
+                </div>
+              );
+            })}
           </div>
-          {variation.size.map((sizeObj, sizeIndex) => (
-            <label key={sizeObj.name}>
-              Stock for {sizeObj.name}:
-              <input
-                type="number"
-                value={sizeObj.stock || ""}
-                onChange={(e) =>
-                  handleInputChange(
-                    index,
-                    `stock-${sizeObj.name}`,
-                    e.target.value
-                  )
-                }
-              />
-            </label>
-          ))}
           <label>
             Image URL:
             <ImageDropzone

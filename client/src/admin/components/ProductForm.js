@@ -9,8 +9,6 @@ const ProductForm = () => {
     description: "",
     price: "",
     files: [],
-    sizes: [],
-    colors: [],
   });
 
   const handleChange = (e) => {
@@ -49,39 +47,46 @@ const ProductForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label>
-        Product Name:
-        <input
-          type="text"
-          name="productName"
-          value={product.productName}
-          onChange={handleChange}
-          required
-        />
-      </label>
-      <label>
-        Description:
-        <textarea
-          name="description"
-          value={product.description}
-          onChange={handleChange}
-          required
-        />
-      </label>
-      <label>
-        Price:
-        <input
-          type="number"
-          step="0.01"
-          name="price"
-          value={product.price}
-          onChange={handleChange}
-          required
-        />
-      </label>
+      <div className="input-container">
+        <label>
+          Product Name:
+          <input
+            type="text"
+            name="productName"
+            value={product.productName}
+            onChange={handleChange}
+            required
+          />
+        </label>
+        <label>
+          Description:
+          <textarea
+            name="description"
+            value={product.description}
+            onChange={handleChange}
+            required
+          />
+        </label>
+        <label>
+          Price:
+          <input
+            type="number"
+            step="0.01"
+            name="price"
+            value={product.price}
+            onChange={handleChange}
+            required
+          />
+        </label>
+        <div className="image-dropzone-container">
+          <ImageDropzone product={product} setProduct={setProduct} />
+        </div>
+      </div>
 
-      <VariationForm variations={variations} setVariations={setVariations} />
-      <ImageDropzone product={product} setProduct={setProduct} />
+      <div className="variations-container">
+        <VariationForm variations={variations} setVariations={setVariations} />
+      </div>
+
       <button type="submit">Add Product</button>
     </form>
   );
