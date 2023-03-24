@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import ScrollToTop from "./helpers/scroll-top";
 import { BrowserRouter as Router } from "react-router-dom";
 import Routes from "./Routes";
+import TokenManager from "./TokenManager";
 
 const App = () => {
   return (
@@ -17,7 +18,10 @@ const App = () => {
             </div>
           }
         >
-          <Routes />
+          <div>
+            <TokenManager />
+            <Routes />
+          </div>
         </Suspense>
       </ScrollToTop>
     </Router>

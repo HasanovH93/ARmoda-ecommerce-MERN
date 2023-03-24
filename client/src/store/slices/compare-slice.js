@@ -12,6 +12,7 @@ const compareSlice = createSlice({
       cogoToast.success("Added To compare", { position: "bottom-left" });
     },
     deleteFromCompare(state, action) {
+      console.log(action.payload);
       state.compareItems = state.compareItems.filter(
         (item) => item._id !== action.payload
       );

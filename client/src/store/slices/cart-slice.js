@@ -10,73 +10,43 @@ const cartSlice = createSlice({
   reducers: {
     addToCart(state, action) {
       const product = action.payload;
-      if (!product.variation) {
-        const cartItem = state.cartItems.find(
-          (item) => item._id === product._id
-        );
-        if (!cartItem) {
-          state.cartItems.push({
-            ...product,
-            quantity: product.quantity ? product.quantity : 1,
-            cartItemId: uuidv4(),
-          });
-        } else {
-          state.cartItems = state.cartItems.map((item) => {
-            if (item.cartItemId === cartItem.cartItemId) {
-              return {
-                ...item,
-                quantity: product.quantity
-                  ? item.quantity + product.quantity
-                  : item.quantity + 1,
-              };
-            }
-            return item;
-          });
-        }
-      } else {
-        const cartItem = state.cartItems.find(
-          (item) =>
-            item._id === product._id &&
-            product.selectedProductColor &&
-            product.selectedProductColor === item.selectedProductColor &&
-            product.selectedProductSize &&
-            product.selectedProductSize === item.selectedProductSize &&
-            (product.cartItemId ? product.cartItemId === item.cartItemId : true)
-        );
-        if (!cartItem) {
-          state.cartItems.push({
-            ...product,
-            quantity: product.quantity ? product.quantity : 1,
-            cartItemId: uuidv4(),
-          });
-        } else if (
-          cartItem !== undefined &&
-          (cartItem.selectedProductColor !== product.selectedProductColor ||
-            cartItem.selectedProductSize !== product.selectedProductSize)
+      let existingCartItem = null;
+
+      // Find the existing cart item
+      state.cartItems.forEach((item) => {
+        if (
+          item._id === product._id &&
+          ((!item.selectedProductColor && !product.selectedProductColor) ||
+            (item.selectedProductColor &&
+              item.selectedProductColor === product.selectedProductColor)) &&
+          ((!item.selectedProductSize && !product.selectedProductSize) ||
+            (item.selectedProductSize &&
+              item.selectedProductSize === product.selectedProductSize))
         ) {
-          state.cartItems = [
-            ...state.cartItems,
-            {
-              ...product,
-              quantity: product.quantity ? product.quantity : 1,
-              cartItemId: uuidv4(),
-            },
-          ];
-        } else {
-          state.cartItems = state.cartItems.map((item) => {
-            if (item.cartItemId === cartItem.cartItemId) {
-              return {
-                ...item,
-                quantity: product.quantity
-                  ? item.quantity + product.quantity
-                  : item.quantity + 1,
-                selectedProductColor: product.selectedProductColor,
-                selectedProductSize: product.selectedProductSize,
-              };
-            }
-            return item;
-          });
+          existingCartItem = item;
         }
+      });
+
+      if (!existingCartItem) {
+        // If the cart item does not exist, add it to the cart
+        state.cartItems.push({
+          ...product,
+          quantity: product.quantity ? product.quantity : 1,
+          cartItemId: uuidv4(),
+        });
+      } else {
+        // If the cart item exists, update its quantity
+        state.cartItems = state.cartItems.map((item) => {
+          if (item.cartItemId === existingCartItem.cartItemId) {
+            return {
+              ...item,
+              quantity: product.quantity
+                ? item.quantity + product.quantity
+                : item.quantity + 1,
+            };
+          }
+          return item;
+        });
       }
 
       cogoToast.success("Added To Cart", { position: "bottom-left" });

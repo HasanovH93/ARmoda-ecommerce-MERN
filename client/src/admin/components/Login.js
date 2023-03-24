@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setAdminToken } from "../../store/slices/auth-slice";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate(); // initialize navigate hook
+  const dispatch = useDispatch();
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -26,10 +29,9 @@ const Login = () => {
       });
       if (res.ok) {
         const data = await res.json();
-        // save token to local storage
-        localStorage.setItem("token", data.token);
+        dispatch(setAdminToken(data));
         // navigate to dashboard
-        navigate("/dashboard");
+        navigate("/admin-panel/dashboard");
       } else {
         setErrorMessage("Invalid email or password.");
       }

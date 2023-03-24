@@ -4,14 +4,13 @@ import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
 
 const routes = [
+  { path: "/admin-panel/login", element: <Login /> },
   {
     path: "/admin-panel",
-    element: <Login />,
-  },
-  {
-    path: "/dashboard",
-    element: <Dashboard />,
-    children: [{ path: "add-product", element: <AddProduct /> }],
+    children: [
+      { path: "dashboard", element: <Dashboard /> },
+      { path: "add-product", element: <AddProduct /> },
+    ],
   },
 ];
 
