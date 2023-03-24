@@ -8,8 +8,14 @@ const routes = [
   {
     path: "/admin-panel",
     children: [
-      { path: "dashboard", element: <Dashboard /> },
-      { path: "add-product", element: <AddProduct /> },
+      {
+        path: "dashboard",
+        element: <Dashboard />,
+      },
+      {
+        path: "add-product",
+        element: <AddProduct />,
+      },
     ],
   },
 ];

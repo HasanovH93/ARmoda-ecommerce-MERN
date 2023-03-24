@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { clearUserToken } from "./store/slices/auth-slice";
+import { clearAdminToken, clearUserToken } from "./store/slices/auth-slice";
 
 const TokenManager = ({ children }) => {
   const location = useLocation();
@@ -13,7 +13,7 @@ const TokenManager = ({ children }) => {
     // Check if the current page is the admin panel page
     const isAdminPanel = location.pathname.includes("/admin-panel");
     if (isAdminPanel && adminToken) {
-      // Store the admin token in local storage when on the admin panel page
+      // Store the admin token in local storage
       localStorage.setItem("token", adminToken);
     } else if (!isAdminPanel && userToken) {
       // Store the user token in local storage for all other pages
@@ -25,7 +25,7 @@ const TokenManager = ({ children }) => {
 
     // Clean up the token from Redux store when not on the admin panel page
     if (!isAdminPanel) {
-      dispatch(clearUserToken());
+      dispatch(clearAdminToken());
     }
   }, [location.pathname, userToken, adminToken, dispatch]);
 

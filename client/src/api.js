@@ -1,8 +1,10 @@
 // src/api.js
 import axios from "axios";
 
+const apiUrl = process.env.REACT_APP_API_URL;
+console.log(apiUrl);
 const api = axios.create({
-  baseURL: "http://localhost:3030",
+  baseURL: apiUrl,
 });
 
 // Add a request interceptor to set the Authorization header for all requests
