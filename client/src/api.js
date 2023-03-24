@@ -1,4 +1,3 @@
-// src/api.js
 import axios from "axios";
 
 const apiUrl = process.env.REACT_APP_API_URL;
@@ -34,7 +33,5 @@ export const fetchAllProducts = async () => {
     console.error("Error fetching hotels:", error);
   }
 };
-
-
 
 export default api;

@@ -8,8 +8,18 @@ const compareSlice = createSlice({
   },
   reducers: {
     addToCompare(state, action) {
-      state.compareItems.push(action.payload);
-      cogoToast.success("Added To compare", { position: "bottom-left" });
+      const existingItemIndex = state.compareItems.findIndex(
+        (item) => item._id === action.payload._id
+      );
+
+      if (existingItemIndex === -1) {
+        state.compareItems.push(action.payload);
+        cogoToast.success("Added To compare", { position: "bottom-left" });
+      } else {
+        cogoToast.warn("Item already in compare list", {
+          position: "bottom-left",
+        });
+      }
     },
     deleteFromCompare(state, action) {
       console.log(action.payload);

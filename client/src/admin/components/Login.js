@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setAdminToken } from "../../store/slices/auth-slice";
-import api from "../../api";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const navigate = useNavigate(); // initialize navigate hook
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleEmailChange = (event) => {
@@ -22,7 +21,6 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      // const res = await api.post("/admin/login", { email, password });
       const res = await fetch("http://localhost:3030/admin/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -38,6 +36,7 @@ const Login = () => {
         setErrorMessage("Invalid email or password.");
       }
     } catch (error) {
+      console.log(error.message);
       setErrorMessage("An error occurred. Please try again later.");
     }
   };

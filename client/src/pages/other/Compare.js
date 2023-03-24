@@ -16,6 +16,7 @@ const Compare = () => {
   const currency = useSelector((state) => state.currency);
   const { compareItems } = useSelector((state) => state.compare);
   const { cartItems } = useSelector((state) => state.cart);
+  console.log(compareItems);
 
   return (
     <Fragment>
@@ -44,7 +45,7 @@ const Compare = () => {
                             <th className="title-column">Product Info</th>
                             {compareItems.map((compareItem, key) => {
                               const cartItem = cartItems.find(
-                                (item) => item.id === compareItem.id
+                                (item) => item._id === compareItem._id
                               );
                               return (
                                 <td className="product-image-title" key={key}>
@@ -63,7 +64,7 @@ const Compare = () => {
                                     to={
                                       process.env.PUBLIC_URL +
                                       "/product/" +
-                                      compareItem.id
+                                      compareItem._id
                                     }
                                     className="image"
                                   >
@@ -81,7 +82,7 @@ const Compare = () => {
                                       to={
                                         process.env.PUBLIC_URL +
                                         "/product/" +
-                                        compareItem.id
+                                        compareItem._id
                                       }
                                     >
                                       {compareItem.name}
@@ -100,7 +101,7 @@ const Compare = () => {
                                     ) : compareItem.variation &&
                                       compareItem.variation.length >= 1 ? (
                                       <Link
-                                        to={`${process.env.PUBLIC_URL}/product/${compareItem.id}`}
+                                        to={`${process.env.PUBLIC_URL}/product/${compareItem._id}`}
                                       >
                                         Select Option
                                       </Link>
