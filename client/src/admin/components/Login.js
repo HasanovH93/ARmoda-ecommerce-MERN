@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setAdminToken } from "../../store/slices/auth-slice";
+import api from "../../api";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -21,15 +22,12 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const res = await fetch("http://localhost:3030/admin/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+      const res = await api.post("/admin/login", {
+        email,
+        password,
       });
-      if (res.ok) {
-        const data = await res.json();
-        console.log(data);
-        dispatch(setAdminToken(data));
+      if (res.status === 200) {
+        dispatch(setAdminToken(res.data));
         // navigate to dashboard
         navigate("/admin-panel/dashboard");
       } else {
