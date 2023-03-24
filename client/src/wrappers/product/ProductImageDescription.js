@@ -17,8 +17,8 @@ const ProductImageDescription = ({
   const { cartItems } = useSelector((state) => state.cart);
   const { wishlistItems } = useSelector((state) => state.wishlist);
   const { compareItems } = useSelector((state) => state.compare);
-  const wishlistItem = wishlistItems.find((item) => item.id === product._id);
-  const compareItem = compareItems.find((item) => item.id === product._id);
+  const wishlistItem = wishlistItems.find((item) => item._id === product._id);
+  const compareItem = compareItems.find((item) => item._id === product._id);
 
   const discountedPrice = getDiscountPrice(product.price, product.discount);
   const finalProductPrice = +(product.price * currency.currencyRate).toFixed(2);

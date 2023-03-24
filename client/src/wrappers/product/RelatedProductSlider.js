@@ -51,13 +51,13 @@ const RelatedProductSlider = ({ spaceBottomClass, category }) => {
                   product={product}
                   currency={currency}
                   cartItem={cartItems.find(
-                    (cartItem) => cartItem.id === product._id
+                    (cartItem) => cartItem._id === product._id
                   )}
                   wishlistItem={wishlistItems.find(
-                    (wishlistItem) => wishlistItem.id === product._id
+                    (wishlistItem) => wishlistItem._id === product._id
                   )}
                   compareItem={compareItems.find(
-                    (compareItem) => compareItem.id === product._id
+                    (compareItem) => compareItem._id === product._id
                   )}
                 />
               </SwiperSlide>

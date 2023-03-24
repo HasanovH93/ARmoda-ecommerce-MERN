@@ -6,16 +6,18 @@ import SEO from "../../components/seo";
 import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
 import { addToCart } from "../../store/slices/cart-slice";
-import { deleteFromWishlist, deleteAllFromWishlist } from "../../store/slices/wishlist-slice"
+import {
+  deleteFromWishlist,
+  deleteAllFromWishlist,
+} from "../../store/slices/wishlist-slice";
 
 const Wishlist = () => {
   const dispatch = useDispatch();
   let { pathname } = useLocation();
-  
+
   const currency = useSelector((state) => state.currency);
   const { wishlistItems } = useSelector((state) => state.wishlist);
   const { cartItems } = useSelector((state) => state.cart);
-  
 
   return (
     <Fragment>
@@ -25,11 +27,11 @@ const Wishlist = () => {
       />
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}
-        <Breadcrumb 
+        <Breadcrumb
           pages={[
-            {label: "Home", path: process.env.PUBLIC_URL + "/" },
-            {label: "Wishlist", path: process.env.PUBLIC_URL + pathname }
-          ]} 
+            { label: "Home", path: process.env.PUBLIC_URL + "/" },
+            { label: "Wishlist", path: process.env.PUBLIC_URL + pathname },
+          ]}
         />
         <div className="cart-main-area pt-90 pb-100">
           <div className="container">
@@ -62,7 +64,7 @@ const Wishlist = () => {
                               discountedPrice * currency.currencyRate
                             ).toFixed(2);
                             const cartItem = cartItems.find(
-                              item => item.id === wishlistItem.id
+                              (item) => item._id === wishlistItem._id
                             );
                             return (
                               <tr key={key}>
@@ -71,7 +73,7 @@ const Wishlist = () => {
                                     to={
                                       process.env.PUBLIC_URL +
                                       "/product/" +
-                                      wishlistItem.id
+                                      wishlistItem._id
                                     }
                                   >
                                     <img
@@ -90,7 +92,7 @@ const Wishlist = () => {
                                     to={
                                       process.env.PUBLIC_URL +
                                       "/product/" +
-                                      wishlistItem.id
+                                      wishlistItem._id
                                     }
                                   >
                                     {wishlistItem.name}
@@ -130,7 +132,7 @@ const Wishlist = () => {
                                   ) : wishlistItem.variation &&
                                     wishlistItem.variation.length >= 1 ? (
                                     <Link
-                                      to={`${process.env.PUBLIC_URL}/product/${wishlistItem.id}`}
+                                      to={`${process.env.PUBLIC_URL}/product/${wishlistItem._id}`}
                                     >
                                       Select option
                                     </Link>
@@ -171,7 +173,9 @@ const Wishlist = () => {
                                 <td className="product-remove">
                                   <button
                                     onClick={() =>
-                                      dispatch(deleteFromWishlist(wishlistItem.id))
+                                      dispatch(
+                                        deleteFromWishlist(wishlistItem._id)
+                                      )
                                     }
                                   >
                                     <i className="fa fa-times"></i>
@@ -197,7 +201,9 @@ const Wishlist = () => {
                         </Link>
                       </div>
                       <div className="cart-clear">
-                        <button onClick={() => dispatch(deleteAllFromWishlist())}>
+                        <button
+                          onClick={() => dispatch(deleteAllFromWishlist())}
+                        >
                           Clear Wishlist
                         </button>
                       </div>
