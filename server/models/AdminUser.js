@@ -1,13 +1,13 @@
 const { Schema, model, Types } = require("mongoose");
 
-const userSchema = new Schema({
+const adminSchema = new Schema({
   email: { type: String, required: true, unique: true },
   username: { type: String, required: true },
   imageUrl: { type: String, default: "" },
   hashedPassword: { type: String, required: true },
 });
 
-userSchema.index(
+adminSchema.index(
   { email: 1 },
   {
     collation: {
@@ -17,6 +17,6 @@ userSchema.index(
   }
 );
 
-const User = new model("User", userSchema);
+const Admin = new model("Admin", adminSchema);
 
-module.exports = User;
+module.exports = Admin;

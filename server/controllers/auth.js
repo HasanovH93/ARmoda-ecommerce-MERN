@@ -11,6 +11,7 @@ const { parseError } = require("../util/parser");
 const { s3UploadImg } = require("../middlewares/imagesUpload");
 const { getByUserId, changeImage } = require("../services/item");
 const { hasUser } = require("../middlewares/guards");
+const removePassword = require("../helpers/removePassword");
 
 authController.post(
   "/register",
@@ -91,18 +92,5 @@ authController.put("/profile", s3UploadImg(), hasUser(), async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
-
-const removePassword = (data) => {
-  const { email, id, username, imageUrl, likedHotels } = data;
-
-  const userData = {
-    email,
-    id,
-    username,
-    imageUrl,
-    likedHotels,
-  };
-  return userData;
-};
 
 module.exports = authController;
