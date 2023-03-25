@@ -12,10 +12,10 @@
     padding: 80px;
     text-align: left;
     @media #{$lg-layout} {
-      padding: 80px 50px;
+      padding: 40px 30px;
     }
     @media #{$xs-layout} {
-      padding: 40px 15px;
+      padding: 20px 105px;
     }
     .login-register-form {
       form {
@@ -23,10 +23,16 @@
           background-color: transparent;
           border: 1px solid #ebebeb;
           color: #333;
-          font-size: 14px;
-          height: 45px;
-          margin-bottom: 30px;
-          padding: 0 15px;
+          font-size: 12px;
+          height: 35px;
+          margin-bottom: 20px;
+          padding: 0 10px;
+        }
+        .error-message {
+          color: red;
+          font-size: 12px;
+          margin-top: -15px;
+          margin-bottom: 10px;
         }
         input[type="checkbox"] {
           height: 15px;

@@ -1,4 +1,6 @@
 import axios from "axios";
+import { store } from "./store/store";
+import { setErrorMessage, clearErrorMessage } from "./store/slices/error-slice";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 const api = axios.create({
@@ -21,6 +23,24 @@ api.interceptors.request.use(
     return config;
   },
   (error) => {
+    return Promise.reject(error);
+  }
+);
+
+api.interceptors.response.use(
+  (response) => {
+    // If the request was successful, clear any previous error messages
+    console.log(response);
+    store.dispatch(clearErrorMessage());
+    return response;
+  },
+  (error) => {
+    console.log(error);
+    // If there was an error, dispatch it to the Redux store
+    const errorMessage =
+      error.response?.data?.message || "An error occurred. Please try again.";
+    store.dispatch(setErrorMessage(errorMessage));
+
     return Promise.reject(error);
   }
 );

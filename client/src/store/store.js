@@ -15,6 +15,7 @@ import authReducer, {
   clearUserToken,
   clearAdminToken,
 } from "./slices/auth-slice";
+import errorReducer from "./slices/error-slice";
 import storage from "redux-persist/lib/storage";
 import productReducer from "./slices/product-slice";
 import currencyReducer from "./slices/currency-slice";
@@ -35,6 +36,7 @@ export const rootReducer = combineReducers({
   compare: compareReducer,
   wishlist: wishlistReducer,
   auth: authReducer,
+  error: errorReducer,
 });
 
 const autoLogoutMiddleware = (store) => (next) => (action) => {

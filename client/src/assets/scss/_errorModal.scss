@@ -1,0 +1,15 @@
+.error-alert-modal {
+  position: fixed;
+  z-index: 1000;
+  right: 0;
+  top: 100px; /* Adjust this value based on the height of your header */
+  padding: 10px;
+}
+
+.error-alert-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}

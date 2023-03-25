@@ -3,7 +3,7 @@ import ScrollToTop from "./helpers/scroll-top";
 import { BrowserRouter as Router } from "react-router-dom";
 import Routes from "./Routes";
 import TokenManager from "./TokenManager";
-import ErrorBoundary from "./components/errorBoundary/ErrorBoundary";
+import ErrorAlert from "./components/error-alert/ErrorAlert";
 
 const App = () => {
   return (
@@ -21,6 +21,7 @@ const App = () => {
         >
           <div>
             <TokenManager />
+            <ErrorAlert />
             <Routes />
           </div>
         </Suspense>
