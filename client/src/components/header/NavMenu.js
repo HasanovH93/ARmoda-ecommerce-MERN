@@ -2,9 +2,21 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
+import { useState } from "react";
+import LoginRegisterModal from "../LoginRegisterModal/LoginRegisterModal";
 
 const NavMenu = ({ menuWhiteClass, sidebarMenu }) => {
   const { t } = useTranslation();
+
+  const [showModal, setShowModal] = useState(false);
+
+  const handleModalOpen = () => {
+    setShowModal(true);
+  };
+
+  const handleModalClose = () => {
+    setShowModal(false);
+  };
 
   return (
     <div
@@ -202,10 +214,17 @@ const NavMenu = ({ menuWhiteClass, sidebarMenu }) => {
                 </Link>
               </li>
               <li>
-                <Link to={process.env.PUBLIC_URL + "/login-register"}>
+                <Link
+                  to="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleModalOpen();
+                  }}
+                >
                   {t("login_register")}
                 </Link>
               </li>
+              <LoginRegisterModal show={showModal} onHide={handleModalClose} />
               <li>
                 <Link to={process.env.PUBLIC_URL + "/about"}>
                   {t("about_us")}
