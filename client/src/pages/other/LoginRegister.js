@@ -26,7 +26,7 @@ const LoginRegisterContent = ({ show, onHide }) => {
         <Modal.Body>
           <Tab.Content>
             <Tab.Pane eventKey="login">
-              <LoginForm />
+              <LoginForm onHide={onHide} />
             </Tab.Pane>
             <Tab.Pane eventKey="register">
               <RegisterForm onHide={onHide} />

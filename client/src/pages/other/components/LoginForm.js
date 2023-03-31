@@ -15,7 +15,7 @@ const validationSchema = Yup.object({
     .min(8, "The password should have a minimum length of 8"),
 });
 
-const LoginForm = () => {
+const LoginForm = ({ onHide }) => {
   const dispatch = useDispatch();
 
   const initialValues = {
@@ -24,12 +24,15 @@ const LoginForm = () => {
   };
 
   const onSubmit = async (values) => {
+    console.log("SUBMIT");
     try {
       const response = await api.post("/users/login", {
         email: values.email,
         password: values.password,
       });
+      console.log(response.data);
       dispatch(setUserToken(response.data));
+      onHide();
     } catch (error) {
       console.error("Error logging in:", error);
     }
