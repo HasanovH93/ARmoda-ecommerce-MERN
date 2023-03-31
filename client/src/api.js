@@ -30,12 +30,10 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => {
     // If the request was successful, clear any previous error messages
-    console.log(response);
     store.dispatch(clearErrorMessage());
     return response;
   },
   (error) => {
-    console.log(error);
     // If there was an error, dispatch it to the Redux store
     const errorMessage =
       error.response?.data?.message || "An error occurred. Please try again.";

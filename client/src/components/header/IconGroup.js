@@ -51,7 +51,7 @@ const IconGroup = ({ iconWhiteClass }) => {
           </form>
         </div>
       </div>
-      <div className="same-style account-setting  d-lg-block">
+      <div className="same-style account-setting d-none d-lg-block">
         <button
           className="account-setting-active"
           onClick={(e) => handleClick(e)}

@@ -3,7 +3,6 @@ import clsx from "clsx";
 import { Link } from "react-router-dom";
 
 const BannerFourteenSingle = ({ data, spaceBottomClass }) => {
-  console.log(process.env.PUBLIC_URL);
   return (
     <div className={clsx("single-banner", spaceBottomClass)}>
       <Link to={process.env.PUBLIC_URL + data.link}>

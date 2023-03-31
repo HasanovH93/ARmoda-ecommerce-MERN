@@ -13,7 +13,6 @@ const ProductTabLeft = () => {
   let { id } = useParams();
   const { products } = useSelector((state) => state.product);
   const product = products.find((product) => product._id === id);
-  console.log(product);
 
   return (
     <Fragment>

@@ -61,7 +61,6 @@
 
 .modal-25w {
   width: 25%;
-  min-width: 400px;
   h4 {
     font-size: 17px;
   }
@@ -69,7 +68,7 @@
 
 @media #{ $md-layout }, #{ $xs-layout }, #{ $sm-layout }, #{ $xxs-layout } {
   .modal-25w {
-    width: 90%;
-    max-width: 350px;
+    width: 100%;
+    max-width: 100%;
   }
 }

@@ -39,7 +39,6 @@ const Login = () => {
         setErrorMessage("Invalid email or password.");
       }
     } catch (error) {
-      console.log(error.message);
       setErrorMessage("An error occurred. Please try again later.");
     }
   };

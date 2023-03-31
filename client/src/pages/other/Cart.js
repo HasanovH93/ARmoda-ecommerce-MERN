@@ -22,7 +22,6 @@ const Cart = () => {
 
   const currency = useSelector((state) => state.currency);
   const { cartItems } = useSelector((state) => state.cart);
-  console.log(cartItems);
   return (
     <Fragment>
       <SEO

@@ -24,13 +24,11 @@ const LoginForm = ({ onHide }) => {
   };
 
   const onSubmit = async (values) => {
-    console.log("SUBMIT");
     try {
       const response = await api.post("/users/login", {
         email: values.email,
         password: values.password,
       });
-      console.log(response.data);
       dispatch(setUserToken(response.data));
       onHide();
     } catch (error) {

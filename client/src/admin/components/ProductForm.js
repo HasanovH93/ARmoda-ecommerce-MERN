@@ -35,9 +35,7 @@ const ProductForm = () => {
     });
 
     try {
-      console.log(formData);
       const response = await api.post("/hotels/create", formData);
-      console.log(response.data);
     } catch (error) {
       console.error("Error while adding hotel:", error);
     }

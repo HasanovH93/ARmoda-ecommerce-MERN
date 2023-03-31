@@ -8,7 +8,6 @@ const wishlistSlice = createSlice({
   },
   reducers: {
     addToWishlist(state, action) {
-      console.log(action.payload);
       const isInWishlist = state.wishlistItems.findIndex(
         (item) => item._id === action.payload._id
       );
