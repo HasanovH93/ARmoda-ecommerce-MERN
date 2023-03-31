@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import { useState } from "react";
-import LoginRegisterModal from "../LoginRegisterModal/LoginRegisterModal";
+import LoginRegisterContent from "../../pages/other/LoginRegister";
 
 const NavMenu = ({ menuWhiteClass, sidebarMenu }) => {
   const { t } = useTranslation();
@@ -224,7 +224,10 @@ const NavMenu = ({ menuWhiteClass, sidebarMenu }) => {
                   {t("login_register")}
                 </Link>
               </li>
-              <LoginRegisterModal show={showModal} onHide={handleModalClose} />
+              <LoginRegisterContent
+                show={showModal}
+                onHide={handleModalClose}
+              />
               <li>
                 <Link to={process.env.PUBLIC_URL + "/about"}>
                   {t("about_us")}

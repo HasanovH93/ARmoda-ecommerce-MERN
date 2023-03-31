@@ -4,6 +4,8 @@ import * as Yup from "yup";
 import api from "../../../api";
 import { useDispatch } from "react-redux";
 import { setUserToken } from "../../../store/slices/auth-slice";
+import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import { FaUser, FaEnvelope, FaLock, FaFacebookF } from "react-icons/fa";
 
 const validationSchema = Yup.object({
   username: Yup.string()
@@ -21,7 +23,7 @@ const validationSchema = Yup.object({
     .required("Confirm Password is required"),
 });
 
-const RegisterForm = () => {
+const RegisterForm = ({ onHide }) => {
   const dispatch = useDispatch();
 
   const initialValues = {
@@ -40,6 +42,7 @@ const RegisterForm = () => {
         rePass: values.rePass,
       });
       dispatch(setUserToken(response.data));
+      onHide();
     } catch (error) {
       console.error("Error registering user:", error);
     }
@@ -52,69 +55,94 @@ const RegisterForm = () => {
   });
 
   return (
-    <div className="login-form-container">
-      <div className="login-register-form">
-        <form onSubmit={formik.handleSubmit}>
-          <div>
-            <label htmlFor="username">Username</label>
-            <input
-              type="text"
-              name="username"
-              value={formik.values.username}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-            />
-            {formik.touched.username && formik.errors.username ? (
-              <div className="error-message">{formik.errors.username}</div>
-            ) : null}
-          </div>
-          <div>
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              name="email"
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-            />
-            {formik.touched.email && formik.errors.email ? (
-              <div className="error-message">{formik.errors.email}</div>
-            ) : null}
-          </div>
-          <div>
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              name="password"
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-            />
-            {formik.touched.password && formik.errors.password ? (
-              <div className="error-message">{formik.errors.password}</div>
-            ) : null}
-          </div>
-          <div>
-            <label htmlFor="rePass">Confirm Password</label>
-            <input
-              type="password"
-              name="rePass"
-              value={formik.values.rePass}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-            />
-            {formik.touched.rePass && formik.errors.rePass ? (
-              <div className="error-message">{formik.errors.rePass}</div>
-            ) : null}
-          </div>
-          <div className="button-box">
-            <button type="submit">
-              <span>Register</span>
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+    <Container className="auth-form register-form">
+      <Row>
+        <Col>
+          <h2 className="text-center">Sign Up</h2>
+          <Form onSubmit={formik.handleSubmit}>
+            <Form.Group>
+              <Form.Label htmlFor="username" className="sr-only">
+                Username
+              </Form.Label>
+              <div className="input-icon">
+                <FaUser />
+                <Form.Control
+                  type="text"
+                  required
+                  placeholder="Username"
+                  className="border-bottom-only"
+                  {...formik.getFieldProps("username")}
+                />
+              </div>
+              {formik.touched.username && formik.errors.username ? (
+                <div className="text-danger">{formik.errors.username}</div>
+              ) : null}
+            </Form.Group>
+            <Form.Group>
+              <Form.Label htmlFor="email" className="sr-only">
+                Email address
+              </Form.Label>
+              <div className="input-icon">
+                <FaEnvelope />
+                <Form.Control
+                  type="email"
+                  required
+                  placeholder="Email"
+                  className="border-bottom-only"
+                  {...formik.getFieldProps("email")}
+                />
+              </div>
+              {formik.touched.email && formik.errors.email ? (
+                <div className="text-danger">{formik.errors.email}</div>
+              ) : null}
+            </Form.Group>
+            <Form.Group>
+              <Form.Label htmlFor="password" className="sr-only">
+                Password
+              </Form.Label>
+              <div className="input-icon">
+                <FaLock />
+                <Form.Control
+                  type="password"
+                  required
+                  placeholder="Password"
+                  className="border-bottom-only"
+                  {...formik.getFieldProps("password")}
+                />
+              </div>
+              {formik.touched.password && formik.errors.password ? (
+                <div className="text-danger">{formik.errors.password}</div>
+              ) : null}
+            </Form.Group>
+            <Form.Group>
+              <Form.Label htmlFor="repeatPassword" className="sr-only">
+                Repeat Password
+              </Form.Label>
+              <div className="input-icon">
+                <FaLock />
+                <Form.Control
+                  type="password"
+                  required
+                  placeholder="Repeat Password"
+                  className="border-bottom-only"
+                  {...formik.getFieldProps("rePass")}
+                />
+              </div>
+              {formik.touched.rePass && formik.errors.rePass ? (
+                <div className="text-danger">{formik.errors.rePass}</div>
+              ) : null}
+            </Form.Group>
+            <Button variant="primary" type="submit" className="submit-btn">
+              Submit
+            </Button>
+          </Form>
+          <div className="separator">OR</div>
+          <Button variant="primary" className="facebook-login-btn">
+            <FaFacebookF /> Sign in with Facebook
+          </Button>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

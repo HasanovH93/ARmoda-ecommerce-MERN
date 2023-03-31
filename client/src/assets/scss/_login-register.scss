@@ -1,102 +1,60 @@
-/*------ 24. login register Page  --------*/
+.auth-form {
+  max-width: 400px;
+  margin: 40px auto;
+  .text-center {
+    margin: 0;
+  }
 
-.login-register-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  .login-register-tab-list {
-    h4 {
-      font-size: 15px;
+  .border-bottom-only {
+    border: 0;
+    border-bottom: 1px solid #ced4da;
+    border-radius: 0;
+    box-shadow: none !important;
+    outline: none !important;
+
+    &:focus {
+      box-shadow: 0 1px 0 0 #495057 !important;
     }
   }
-  .login-form-container {
-    padding: 20px;
-    text-align: left;
-    @media #{$lg-layout} {
-      padding: 20px 10px;
+
+  .input-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    > svg {
+      position: absolute;
+      left: 10px;
+      color: #495057;
     }
-    @media #{$xs-layout} {
-      padding: 20px 105px;
-    }
-    .login-register-form {
-      max-width: 200px;
-      form {
-        input {
-          background-color: transparent;
-          border: 1px solid #ebebeb;
-          color: #333;
-          font-size: 12px;
-          height: 35px;
-          margin-bottom: 20px;
-          padding: 0 10px;
-        }
-        .error-message {
-          color: red;
-          font-size: 12px;
-          margin-top: -15px;
-          margin-bottom: 10px;
-        }
-        input[type="checkbox"] {
-          height: 15px;
-          margin: 0;
-          position: relative;
-          top: 1px;
-          width: 17px;
-        }
-        .button-box {
-          .login-toggle-btn {
-            padding: 10px 0 19px;
-            label {
-              color: #242424;
-              font-size: 15px;
-              font-weight: 400;
-              @media #{$xs-layout} {
-                font-size: 14px;
-              }
-            }
-            a {
-              color: #242424;
-              float: right;
-              font-size: 15px;
-              @media #{$xs-layout} {
-                font-size: 14px;
-              }
-              transition: all 0.3s ease 0s;
-              &:hover {
-                color: $theme-color;
-              }
-            }
-            h4 {
-              font-size: 15px;
-            }
-          }
-          button {
-            background-color: #f2f2f2;
-            border: medium none;
-            color: #333;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            line-height: 1;
-            padding: 11px 30px;
-            text-transform: uppercase;
-            transition: all 0.3s ease 0s;
-            &:hover {
-              background-color: $theme-color;
-              color: #fff;
-            }
-          }
-        }
-      }
+
+    > .form-control {
+      padding-left: 35px;
     }
   }
-}
 
-.login-register-area {
-  @media #{$xs-layout} {
-    &.pb-100 {
-      padding-bottom: 60px;
+  .submit-btn {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .separator {
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  .facebook-login-btn {
+    width: 100%;
+    background-color: #3b5998;
+    border-color: #3b5998;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover,
+    &:focus {
+      background-color: #2d4474;
+      border-color: #2d4474;
     }
   }
 }
