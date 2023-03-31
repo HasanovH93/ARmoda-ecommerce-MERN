@@ -7,7 +7,7 @@ import Modal from "react-bootstrap/Modal";
 
 const LoginRegisterContent = ({ show, onHide }) => {
   return (
-    <Modal show={show} onHide={onHide} centered>
+    <Modal show={show} onHide={onHide} centered dialogClassName="modal-25w">
       <Tab.Container defaultActiveKey="login">
         <Modal.Header closeButton>
           <Nav variant="pills" className="login-register-tab-list">
