@@ -24,12 +24,8 @@ const IconGroup = ({ iconWhiteClass }) => {
 
   const [showModal, setShowModal] = useState(false);
 
-  const handleModalOpen = () => {
-    setShowModal(true);
-  };
-
-  const handleModalClose = () => {
-    setShowModal(false);
+  const toggleModal = () => {
+    setShowModal((prevState) => !prevState);
   };
 
   const handleLogout = () => {
@@ -84,16 +80,13 @@ const IconGroup = ({ iconWhiteClass }) => {
                     to="#"
                     onClick={(e) => {
                       e.preventDefault();
-                      handleModalOpen();
+                      toggleModal();
                     }}
                   >
                     {t("login_register")}
                   </Link>
                 </li>
-                <LoginRegisterContent
-                  show={showModal}
-                  onHide={handleModalClose}
-                />
+                <LoginRegisterContent show={showModal} onHide={toggleModal} />
               </>
             )}
           </ul>
