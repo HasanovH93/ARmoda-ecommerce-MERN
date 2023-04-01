@@ -16,7 +16,6 @@ const authSlice = createSlice({
     },
     setAdminToken(state, action) {
       state.adminToken = action.payload.token;
-      state.adminId = action.payload.userId;
       state.expiresIn = action.payload.expiresIn;
     },
     clearUserToken(state) {

@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setAdminToken } from "../../store/slices/auth-slice";
 import api from "../../api";
-import ErrorBoundary from "../../components/errorBoundary/ErrorBoundary";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -32,9 +31,10 @@ const Login = () => {
         password,
       });
       if (res.status === 200) {
+        console.log(res.data);
         dispatch(setAdminToken(res.data));
         // navigate to dashboard
-        navigate("/admin-panel/dashboard");
+        navigate("/dashboard");
       } else {
         setErrorMessage("Invalid email or password.");
       }
@@ -44,38 +44,38 @@ const Login = () => {
   };
 
   return (
-      <div className="login-wrapper">
-        <h2>Login</h2>
-        {errorMessage && <div className="error-message">{errorMessage}</div>}
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={email}
-              onChange={handleEmailChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={password}
-              onChange={handlePasswordChange}
-              required
-            />
-          </div>
-          <button type="submit" className="btn btn-primary">
-            Login
-          </button>
-        </form>
-        <button onClick={throwError}>Throw Error</button>
-      </div>
+    <div className="login-wrapper">
+      <h2>Login</h2>
+      {errorMessage && <div className="error-message">{errorMessage}</div>}
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={email}
+            onChange={handleEmailChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={password}
+            onChange={handlePasswordChange}
+            required
+          />
+        </div>
+        <button type="submit" className="btn btn-primary">
+          Login
+        </button>
+      </form>
+      <button onClick={throwError}>Throw Error</button>
+    </div>
   );
 };
 

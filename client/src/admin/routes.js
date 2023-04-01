@@ -1,23 +1,21 @@
-import React from "react";
 import AddProduct from "./components/AddProduct";
 import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
+import ProtectedRoute from "./ProtectedRoute";
 
-const routes = [
-  { path: "/admin-panel/login", element: <Login /> },
+const adminRoutes = [
   {
-    path: "/admin-panel",
+    path: "/dashboard",
+    element: <ProtectedRoute />,
     children: [
-      {
-        path: "dashboard",
-        element: <Dashboard />,
-      },
-      {
-        path: "add-product",
-        element: <AddProduct />,
-      },
+      { path: "", element: <Dashboard /> },
+      { path: "add-product", element: <AddProduct /> },
     ],
+  },
+  {
+    path: "/dashboard-login",
+    element: <Login />,
   },
 ];
 
-export default routes;
+export default adminRoutes;

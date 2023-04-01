@@ -1,19 +1,12 @@
 import React from "react";
-import { Route, Navigate, Routes } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Outlet, Navigate } from "react-router-dom";
 
-const ProtectedRoute = ({ element, path }) => {
+const ProtectedRoute = () => {
   const adminToken = useSelector((state) => state.auth.adminToken);
+  console.log(adminToken);
 
-  if (!adminToken) {
-    return <Navigate to="/admin-panel/login" />;
-  }
-
-  return (
-    <Routes>
-      <Route path={path} element={element} />
-    </Routes>
-  );
+  return adminToken ? <Outlet /> : <Navigate to="/dashboard-login" />;
 };
 
 export default ProtectedRoute;

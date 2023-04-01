@@ -1,21 +1,7 @@
 import React from "react";
 import { Routes as ReactRoutes, Route, Navigate } from "react-router-dom";
-import pagesRoutes from "./pages/routes";
 import adminRoutes from "./admin/routes";
-
-const renderRoutes = (routesArray) => {
-  return routesArray.map((route, index) => {
-    if (route.children) {
-      return (
-        <Route key={index} path={route.path} element={route.element}>
-          {renderRoutes(route.children)}
-        </Route>
-      );
-    } else {
-      return <Route key={index} path={route.path} element={route.element} />;
-    }
-  });
-};
+import pagesRoutes from "./pages/routes";
 
 const Routes = () => {
   return (
@@ -23,7 +9,19 @@ const Routes = () => {
       {pagesRoutes.map((item, i) => (
         <Route key={i} path={item.path} element={item.renderer()} />
       ))}
-      {renderRoutes(adminRoutes)}
+
+      {adminRoutes.map((route, i) => (
+        <Route key={i} path={route.path} element={route.element}>
+          {route.children &&
+            route.children.map((childRoute, j) => (
+              <Route
+                key={j}
+                path={childRoute.path}
+                element={childRoute.element}
+              />
+            ))}
+        </Route>
+      ))}
 
       <Route path="*" element={<Navigate replace to="/not-found" />} />
     </ReactRoutes>

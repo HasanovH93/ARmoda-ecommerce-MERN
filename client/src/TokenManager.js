@@ -11,8 +11,9 @@ const TokenManager = ({ children }) => {
 
   useEffect(() => {
     // Check if the current page is the admin panel page
-    const isAdminPanel = location.pathname.includes("/admin-panel");
+    const isAdminPanel = location.pathname.includes("/dashboard");
     if (isAdminPanel && adminToken) {
+      console.log(adminToken);
       // Store the admin token in local storage
       localStorage.setItem("token", adminToken);
     } else if (!isAdminPanel && userToken) {
