@@ -6,10 +6,12 @@ import ProtectedRoute from "./ProtectedRoute";
 const adminRoutes = [
   {
     path: "/dashboard",
-    element: <ProtectedRoute />,
+    element: <ProtectedRoute component={Dashboard} />,
     children: [
-      { path: "", element: <Dashboard /> },
-      { path: "add-product", element: <AddProduct /> },
+      {
+        path: "add-product",
+        element: <AddProduct />,
+      },
     ],
   },
   {
