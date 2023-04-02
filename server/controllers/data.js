@@ -30,8 +30,8 @@ const getNextSKU = () => {
 };
 
 dataController.post("/create", s3UploadImg(), hasUser(), async (req, res) => {
-  console.log(req.body);
   try {
+    console.log(req.body.categories.split(","));
     req.body = JSON.parse(JSON.stringify(req.body));
 
     req.body.imageUrls = req.files.map((img) => img.location);
@@ -48,7 +48,7 @@ dataController.post("/create", s3UploadImg(), hasUser(), async (req, res) => {
       image: req.body.imageUrls,
       new: createdAt > oneWeekAgo,
       variation,
-      category: ["1", "2"],
+      category: JSON.parse(req.body.categories.split(",")),
       fullDescription: req.body.description,
       shortDescription: "dadadadada",
       rating: 5,
@@ -60,9 +60,8 @@ dataController.post("/create", s3UploadImg(), hasUser(), async (req, res) => {
     if (req.body.imageUrls.length < 1) {
       throw new Error("At least one Image is required!");
     }
-
+    console.log(data);
     const createdData = await create(data);
-
     res.status(201).send({
       message: "Successfully uploaded " + req.files.length + " files!",
       createdData,
@@ -76,7 +75,7 @@ dataController.post("/create", s3UploadImg(), hasUser(), async (req, res) => {
 dataController.get("/all-hotels", async (req, res) => {
   try {
     const page = parseInt(req.query.page);
-    const limit = 50;
+    const limit = 100;
     const skip = parseInt(page * limit);
     const data = await getAll(skip, limit);
     res.status(200).json(data);

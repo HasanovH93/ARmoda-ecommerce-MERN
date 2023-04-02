@@ -2,7 +2,18 @@ const Hotel = require("../models/Hotel");
 const User = require("../models/User");
 
 async function getAll(skip, limit) {
-  return Hotel.find({}).skip(skip).limit(limit).lean();
+  // Fetch data from the database
+  const hotels = await Hotel.find({}).skip(skip).limit(limit).lean();
+
+  // Calculate the one week ago timestamp
+  const oneWeekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+
+  // Update the 'new' property based on the 'createdAt' field
+  hotels.forEach((hotel) => {
+    hotel.new = hotel.createdAt > oneWeekAgo;
+  });
+
+  return hotels;
 }
 
 async function getLastFour() {
@@ -22,7 +33,7 @@ async function getHotelById(id) {
 }
 
 async function create(item) {
-
+  console.log(item);
   const newHotel = new Hotel(item);
   return await newHotel.save();
 }
