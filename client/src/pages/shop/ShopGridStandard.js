@@ -44,11 +44,10 @@ const ShopGridStandard = ({ isNew = false }) => {
     console.log("Products:", products);
 
     let filteredProducts = products;
-
     if (isNew) {
       console.log("here");
       filteredProducts = products.filter((product) => product.new === true);
-    } else if (category) {
+    } else if (category && category !== "all") {
       // Filter products based on the selected category
       filteredProducts = products.filter((product) =>
         product.category.some(
