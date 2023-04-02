@@ -5,6 +5,9 @@ const VariationForm = ({ variations, setVariations }) => {
   const addVariation = () => {
     setVariations([...variations, { color: "", image: "", size: [] }]);
   };
+  const removeVariation = (index) => {
+    setVariations(variations.filter((_, i) => i !== index));
+  };
 
   const handleInputChange = (index, field, value, checked) => {
     setVariations((prevVariations) => {
@@ -57,6 +60,15 @@ const VariationForm = ({ variations, setVariations }) => {
     <div className="variation-form">
       {variations.map((variation, index) => (
         <div key={index} className="variation">
+          {index > 0 && (
+            <button
+              type="button"
+              className="remove-variation-button"
+              onClick={() => removeVariation(index)}
+            >
+              X
+            </button>
+          )}
           <label>
             Color:
             <select
@@ -98,8 +110,8 @@ const VariationForm = ({ variations, setVariations }) => {
                     {size}
                   </label>
                   {isChecked && (
-                    <label>
-                      Stock for {size}:
+                    <label className="stock-for">
+                      Stock:
                       <input
                         type="number"
                         value={

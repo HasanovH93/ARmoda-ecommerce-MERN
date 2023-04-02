@@ -28,16 +28,16 @@ const CategoriesForm = ({ categories, setCategories }) => {
     <div>
       <h4>Categories:</h4>
       {categoriesList.map((category) => (
-        <div key={category}>
+        <label key={category} className="checkbox-container">
+          {category}
           <input
             type="checkbox"
-            id={category}
             name={category}
             checked={categories.includes(category)}
             onChange={handleCategoryChange}
           />
-          <label htmlFor={category}>{category}</label>
-        </div>
+          <span className="checkmark"></span>
+        </label>
       ))}
     </div>
   );

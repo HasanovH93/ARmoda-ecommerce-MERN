@@ -1,35 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Logo from "../../components/header/Logo";
+import { MdDashboard, MdAdd, MdPeople, MdLocalShipping } from "react-icons/md";
 
 const Sidebar = () => {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsCollapsed(!isCollapsed);
+  };
+
+  const iconSize = isCollapsed ? 24 : 18;
+
   return (
-    <div className="sidebar">
+    <div className={`sidebar${isCollapsed ? " collapsed" : ""}`}>
+      <Logo imageUrl="/assets/img/logo/logo.png" logoClass="dashboard-logo" />
       <ul>
         <li>
           <Link to="/dashboard">
-            <i className="fa fa-tachometer-alt"></i>
+            <MdDashboard />
             <span>Dashboard</span>
           </Link>
         </li>
         <li>
           <Link to="/admin-panel/products">
-            <i className="fa fa-box"></i>
+            <MdLocalShipping size={iconSize} />
             <span>Products</span>
           </Link>
         </li>
         <li>
           <Link to="/dashboard/add-product">
-            <i className="fa fa-plus"></i>
+            <MdAdd />
             <span>Add Product</span>
           </Link>
         </li>
         <li>
           <Link to="/admin-panel/users">
-            <i className="fa fa-users"></i>
+            <MdPeople />
             <span>Users</span>
           </Link>
         </li>
       </ul>
+      <button className="toggle-sidebar" onClick={toggleSidebar}>
+        <i className="fa fa-chevron-left"></i>
+      </button>
     </div>
   );
 };
