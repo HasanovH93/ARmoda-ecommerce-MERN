@@ -5,6 +5,7 @@ import ImageDropzone from "./ImageDropzone";
 import api from "../../api";
 import VariationForm from "./VariationForm";
 import { setProducts } from "../../store/slices/product-slice";
+import CategoriesForm from "./CategoriesForm";
 
 const ProductForm = () => {
   const [product, setProduct] = useState({
@@ -24,14 +25,15 @@ const ProductForm = () => {
     e.preventDefault();
 
     const formData = new FormData();
-    const completeProduct = { ...product, variations };
+    const completeProduct = { ...product, variations, categories };
 
     Object.entries(completeProduct).forEach(([key, value]) => {
+      console.log(key === "categories" || key === "categories");
       if (key === "files") {
         value.forEach((file) => {
           formData.append("img", file);
         });
-      } else if (key === "variations") {
+      } else if (key === "variations" || key === "categories") {
         formData.append(key, JSON.stringify(value));
       } else {
         formData.append(key, value);
@@ -39,7 +41,9 @@ const ProductForm = () => {
     });
 
     try {
+      console.log(formData);
       const response = await api.post("/hotels/create", formData);
+      console.log(response.data);
       dispatch(setProducts(response.data.createdData));
     } catch (error) {
       console.error("Error while adding hotel:", error);
@@ -47,6 +51,8 @@ const ProductForm = () => {
   };
 
   const [variations, setVariations] = useState([{ color: "", size: [] }]);
+
+  const [categories, setCategories] = useState([]);
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -95,7 +101,9 @@ const ProductForm = () => {
         <Form.Label>Product Variations:</Form.Label>
         <VariationForm variations={variations} setVariations={setVariations} />
       </Form.Group>
-
+      <Form.Group controlId="categories">
+        <CategoriesForm categories={categories} setCategories={setCategories} />
+      </Form.Group>
       <Button variant="primary" type="submit">
         Add Product
       </Button>
