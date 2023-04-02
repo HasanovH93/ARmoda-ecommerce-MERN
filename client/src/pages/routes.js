@@ -49,6 +49,10 @@ const routes = [
     renderer: (params = {}) => <ProductTabLeft {...params} />,
   },
   {
+    path: "/category/:category",
+    renderer: (params = {}) => <ShopGridStandard {...params} />,
+  },
+  {
     path: "/login-register",
     renderer: (params = {}) => <LoginRegister {...params} />,
   },

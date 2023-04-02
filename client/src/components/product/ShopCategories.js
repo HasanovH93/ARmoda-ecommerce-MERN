@@ -1,8 +1,22 @@
 import PropTypes from "prop-types";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import { setActiveSort } from "../../helpers/product";
 
-const ShopCategories = ({ categories, getSortParams }) => {
+const ShopCategories = ({ categories, getSortParams, selectedCategory }) => {
+  const [activeCategory, setActiveCategory] = useState("");
+
+  useEffect(() => {
+    setActiveCategory(selectedCategory);
+  }, [selectedCategory]);
+
+  const handleCategoryClick = (category, e) => {
+    getSortParams("category", category);
+    setActiveCategory(category);
+    setActiveSort(e);
+  };
+
   return (
     <div className="sidebar-widget">
       <h4 className="pro-sidebar-title">Categories </h4>
@@ -11,29 +25,35 @@ const ShopCategories = ({ categories, getSortParams }) => {
           <ul>
             <li>
               <div className="sidebar-widget-list-left">
-                <button
-                  onClick={e => {
-                    getSortParams("category", "");
-                    setActiveSort(e);
-                  }}
-                >
-                  <span className="checkmark" /> All Categories
-                </button>
+                <Link to={`/category/all`}>
+                  <button
+                    onClick={(e) => {
+                      getSortParams("category", "");
+                      setActiveCategory("");
+                      setActiveSort(e);
+                    }}
+                    className={activeCategory === "" ? "active" : ""}
+                  >
+                    <span className="checkmark" /> All Categories
+                  </button>
+                </Link>
               </div>
             </li>
             {categories.map((category, key) => {
               return (
                 <li key={key}>
                   <div className="sidebar-widget-list-left">
-                    <button
-                      onClick={e => {
-                        getSortParams("category", category);
-                        setActiveSort(e);
-                      }}
-                    >
-                      {" "}
-                      <span className="checkmark" /> {category}{" "}
-                    </button>
+                    <Link to={`/category/${category.toLowerCase()}`}>
+                      <button
+                        onClick={(e) => {
+                          handleCategoryClick(category, e);
+                        }}
+                        className={activeCategory === category ? "active" : ""}
+                      >
+                        {" "}
+                        <span className="checkmark" /> {category}{" "}
+                      </button>
+                    </Link>
                   </div>
                 </li>
               );
@@ -49,7 +69,8 @@ const ShopCategories = ({ categories, getSortParams }) => {
 
 ShopCategories.propTypes = {
   categories: PropTypes.array,
-  getSortParams: PropTypes.func
+  getSortParams: PropTypes.func,
+  selectedCategory: PropTypes.string,
 };
 
 export default ShopCategories;

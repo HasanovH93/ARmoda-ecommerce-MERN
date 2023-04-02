@@ -1,7 +1,7 @@
 import { Fragment, useState, useEffect } from "react";
 import Paginator from "react-hooks-paginator";
 import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { getSortedProducts } from "../../helpers/product";
 import SEO from "../../components/seo";
 import LayoutOne from "../../layouts/LayoutOne";
@@ -21,6 +21,10 @@ const ShopGridStandard = () => {
   const [currentData, setCurrentData] = useState([]);
   const [sortedProducts, setSortedProducts] = useState([]);
   const { products } = useSelector((state) => state.product);
+  const { category } = useParams();
+
+  // console.log("Category:", category);
+  // console.log("Category type:", typeof category);
 
   const pageLimit = 12;
   let { pathname } = useLocation();
@@ -40,7 +44,24 @@ const ShopGridStandard = () => {
   };
 
   useEffect(() => {
-    let sortedProducts = getSortedProducts(products, sortType, sortValue);
+    console.log("Products:", products); // Add this line to log the products
+
+    let filteredProducts = products;
+
+    if (category) {
+      // Filter products based on the selected category
+      filteredProducts = products.filter((product) =>
+        product.category.some(
+          (cat) => cat.toLowerCase() === category.toLowerCase()
+        )
+      );
+    }
+
+    let sortedProducts = getSortedProducts(
+      filteredProducts,
+      sortType,
+      sortValue
+    );
     const filterSortedProducts = getSortedProducts(
       sortedProducts,
       filterSortType,
@@ -49,7 +70,16 @@ const ShopGridStandard = () => {
     sortedProducts = filterSortedProducts;
     setSortedProducts(sortedProducts);
     setCurrentData(sortedProducts.slice(offset, offset + pageLimit));
-  }, [offset, products, sortType, sortValue, filterSortType, filterSortValue]);
+    console.log("Filtered products:", sortedProducts);
+  }, [
+    offset,
+    products,
+    sortType,
+    sortValue,
+    filterSortType,
+    filterSortValue,
+    category,
+  ]);
 
   return (
     <Fragment>
@@ -76,6 +106,7 @@ const ShopGridStandard = () => {
                   products={products}
                   getSortParams={getSortParams}
                   sideSpaceClass="mr-30"
+                  selectedCategory={category}
                 />
               </div>
               <div className="col-lg-9 order-1 order-lg-2">

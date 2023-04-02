@@ -71,9 +71,10 @@ export const cartItemStock = (item, color, size) => {
 export const getSortedProducts = (products, sortType, sortValue) => {
   if (products && sortType && sortValue) {
     if (sortType === "category") {
-      return products.filter(
-        (product) =>
-          product.category.filter((single) => single === sortValue)[0]
+      return products.filter((product) =>
+        product.category.some(
+          (cat) => cat.toLowerCase() === sortValue.toLowerCase()
+        )
       );
     }
     if (sortType === "tag") {
