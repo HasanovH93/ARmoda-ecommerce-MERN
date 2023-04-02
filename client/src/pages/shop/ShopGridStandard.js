@@ -10,7 +10,7 @@ import ShopSidebar from "../../wrappers/product/ShopSidebar";
 import ShopTopbar from "../../wrappers/product/ShopTopbar";
 import ShopProducts from "../../wrappers/product/ShopProducts";
 
-const ShopGridStandard = () => {
+const ShopGridStandard = ({ isNew = false }) => {
   const [layout, setLayout] = useState("grid three-column");
   const [sortType, setSortType] = useState("");
   const [sortValue, setSortValue] = useState("");
@@ -22,9 +22,6 @@ const ShopGridStandard = () => {
   const [sortedProducts, setSortedProducts] = useState([]);
   const { products } = useSelector((state) => state.product);
   const { category } = useParams();
-
-  // console.log("Category:", category);
-  // console.log("Category type:", typeof category);
 
   const pageLimit = 12;
   let { pathname } = useLocation();
@@ -44,11 +41,14 @@ const ShopGridStandard = () => {
   };
 
   useEffect(() => {
-    console.log("Products:", products); // Add this line to log the products
+    console.log("Products:", products);
 
     let filteredProducts = products;
 
-    if (category) {
+    if (isNew) {
+      console.log("here");
+      filteredProducts = products.filter((product) => product.new === true);
+    } else if (category) {
       // Filter products based on the selected category
       filteredProducts = products.filter((product) =>
         product.category.some(
@@ -70,8 +70,8 @@ const ShopGridStandard = () => {
     sortedProducts = filterSortedProducts;
     setSortedProducts(sortedProducts);
     setCurrentData(sortedProducts.slice(offset, offset + pageLimit));
-    console.log("Filtered products:", sortedProducts);
   }, [
+    isNew,
     offset,
     products,
     sortType,

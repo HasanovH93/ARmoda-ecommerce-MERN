@@ -40,6 +40,7 @@ const ShopCategories = ({ categories, getSortParams, selectedCategory }) => {
               </div>
             </li>
             {categories.map((category, key) => {
+              const categoryName = category.replace(/-/g, " ");
               return (
                 <li key={key}>
                   <div className="sidebar-widget-list-left">
@@ -51,7 +52,7 @@ const ShopCategories = ({ categories, getSortParams, selectedCategory }) => {
                         className={activeCategory === category ? "active" : ""}
                       >
                         {" "}
-                        <span className="checkmark" /> {category}{" "}
+                        <span className="checkmark" /> {categoryName}{" "}
                       </button>
                     </Link>
                   </div>

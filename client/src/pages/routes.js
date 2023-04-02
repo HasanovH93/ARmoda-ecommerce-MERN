@@ -53,6 +53,10 @@ const routes = [
     renderer: (params = {}) => <ShopGridStandard {...params} />,
   },
   {
+    path: "/new",
+    renderer: (params = {}) => <ShopGridStandard isNew {...params} />,
+  },
+  {
     path: "/login-register",
     renderer: (params = {}) => <LoginRegister {...params} />,
   },
