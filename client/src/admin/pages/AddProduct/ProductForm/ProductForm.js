@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Form, Button, Row, Col } from "react-bootstrap";
-import ImageDropzone from "./ImageDropzone";
-import api from "../../api";
-import VariationForm from "./VariationForm";
-import { setProducts } from "../../store/slices/product-slice";
-import CategoriesForm from "./CategoriesForm";
+import ImageDropzone from "../ImageDropzone/ImageDropzone";
+import api from "../../../../api";
+import VariationForm from "../VariationForm/VariationForm";
+import { setProducts } from "../../../../store/slices/product-slice";
+import CategoriesForm from "../CategoriesForm/CategoriesForm";
+import styles from "./ProductForm.module.scss";
 
 const ProductForm = () => {
   const [product, setProduct] = useState({
@@ -57,30 +58,32 @@ const ProductForm = () => {
   return (
     <Form onSubmit={handleSubmit} className="createForm">
       <Row>
-        <Col>
-          <Form.Group controlId="productName">
-            <Form.Label>Product Name:</Form.Label>
-            <Form.Control
-              type="text"
-              name="productName"
-              value={product.productName}
-              onChange={handleChange}
-              required
-            />
-          </Form.Group>
-        </Col>
-        <Col>
-          <Form.Group controlId="description">
-            <Form.Label>Description:</Form.Label>
-            <Form.Control
-              as="textarea"
-              name="description"
-              value={product.description}
-              onChange={handleChange}
-              required
-            />
-          </Form.Group>
-        </Col>
+        <Row>
+          <Col>
+            <Form.Group controlId="productName">
+              <Form.Label className={styles.label}>Product Name:</Form.Label>
+              <Form.Control
+                type="text"
+                name="productName"
+                value={product.productName}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group controlId="description">
+              <Form.Label className={styles.label}>Description:</Form.Label>
+              <Form.Control
+                as="textarea"
+                name="description"
+                value={product.description}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+          </Col>
+        </Row>
       </Row>
 
       <Row>

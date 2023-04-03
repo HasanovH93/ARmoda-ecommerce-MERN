@@ -1,0 +1,18 @@
+.addProduct {
+  margin: 0 auto;
+  max-width: 1100px;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 1200px) {
+  .addProduct {
+    max-width: 100%;
+  }
+}

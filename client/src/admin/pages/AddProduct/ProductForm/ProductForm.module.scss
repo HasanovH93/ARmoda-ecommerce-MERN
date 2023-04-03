@@ -1,0 +1,25 @@
+.createForm {
+  width: 100%;
+  max-width: 1100px;
+  padding: 1rem;
+
+  @media (max-width: 1200px) {
+    width: 95%;
+    margin-left: 5%;
+  }
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.image-dropzone-container {
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 1200px) {
+  .createForm {
+    max-width: 100%;
+  }
+}

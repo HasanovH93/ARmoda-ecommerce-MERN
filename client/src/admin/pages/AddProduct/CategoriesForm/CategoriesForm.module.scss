@@ -1,0 +1,36 @@
+.categoriesContainer {
+  margin-top: 1rem;
+
+  .categoriesTitle {
+    margin-bottom: 1rem;
+  }
+
+  .categoriesRow {
+    display: flex;
+    flex-wrap: wrap;
+
+    .categoryCol {
+      margin-bottom: 1rem;
+      flex: 0 0 50%;
+      max-width: 50%;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+
+      .cardWrapper {
+        display: flex;
+        align-items: center;
+        height: 45px;
+        padding: 0.5rem;
+        border: 1px solid #dee2e6;
+        border-radius: 0.25rem;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
+        word-wrap: break-word;
+        font-size: 12px;
+
+        .checkboxContainer {
+          user-select: none;
+        }
+      }
+    }
+  }
+}

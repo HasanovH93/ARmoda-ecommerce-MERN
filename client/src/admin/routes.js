@@ -1,7 +1,8 @@
-import AddProduct from "./components/AddProduct";
-import Dashboard from "./components/Dashboard";
-import Login from "./components/Login";
-import ProtectedRoute from "./ProtectedRoute";
+import AddProduct from "./pages/AddProduct/AddProduct";
+import Dashboard from "./pages/Dasboard/Dashboard";
+import Login from "./pages/Login/Login";
+
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
 const adminRoutes = [
   {

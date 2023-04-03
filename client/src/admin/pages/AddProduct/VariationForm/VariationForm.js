@@ -1,5 +1,5 @@
 import React from "react";
-import ImageDropzone from "./ImageDropzone";
+import ImageDropzone from "../ImageDropzone/ImageDropzone";
 
 const VariationForm = ({ variations, setVariations }) => {
   const addVariation = () => {

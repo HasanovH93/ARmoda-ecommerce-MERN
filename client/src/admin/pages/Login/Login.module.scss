@@ -1,0 +1,11 @@
+.loginContainer {
+  height: 100vh;
+
+  .loginForm {
+    background-color: white;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    border-radius: 5px;
+  }
+}

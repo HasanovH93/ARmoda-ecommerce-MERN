@@ -1,14 +1,12 @@
 import React from "react";
-import Sidebar from "./Sidebar";
+import Sidebar from "../../components/Sidebar/Sidebar";
 import { Outlet } from "react-router-dom";
 
 const Dashboard = () => {
   return (
     <div>
       <Sidebar />
-      <div style={{ marginLeft: "200px" }}>
-        <Outlet />
-      </div>
+      <Outlet />
     </div>
   );
 };
