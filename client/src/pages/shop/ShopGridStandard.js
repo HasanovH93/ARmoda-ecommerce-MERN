@@ -41,11 +41,8 @@ const ShopGridStandard = ({ isNew = false }) => {
   };
 
   useEffect(() => {
-    console.log("Products:", products);
-
     let filteredProducts = products;
     if (isNew) {
-      console.log("here");
       filteredProducts = products.filter((product) => product.new === true);
     } else if (category && category !== "all") {
       // Filter products based on the selected category

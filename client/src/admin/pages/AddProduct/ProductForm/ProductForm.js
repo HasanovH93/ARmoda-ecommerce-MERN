@@ -29,7 +29,6 @@ const ProductForm = () => {
     const completeProduct = { ...product, variations, categories };
 
     Object.entries(completeProduct).forEach(([key, value]) => {
-      console.log(key === "categories" || key === "categories");
       if (key === "files") {
         value.forEach((file) => {
           formData.append("img", file);
@@ -42,9 +41,7 @@ const ProductForm = () => {
     });
 
     try {
-      console.log(formData);
       const response = await api.post("/hotels/create", formData);
-      console.log(response.data);
       dispatch(setProducts(response.data.createdData));
     } catch (error) {
       console.error("Error while adding hotel:", error);
