@@ -502,6 +502,10 @@
               border: 1px solid #e28b37;
               background-color: #e28b37;
             }
+            &.red {
+              border: white;
+              background-color: red;
+            }
           }
         }
         &--single {
@@ -570,6 +574,10 @@
           &.brown {
             border: 1px solid brown;
             background-color: brown;
+          }
+          &.red {
+            border: white;
+            background-color: red;
           }
           .checkmark {
             position: relative;

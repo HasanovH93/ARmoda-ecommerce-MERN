@@ -48,7 +48,7 @@ export const fetchAllProducts = async () => {
     const response = await api.get("/hotels/all-hotels");
     return response.data;
   } catch (error) {
-    console.error("Error fetching hotels:", error);
+    console.error("Error fetching products:", error);
   }
 };
 
