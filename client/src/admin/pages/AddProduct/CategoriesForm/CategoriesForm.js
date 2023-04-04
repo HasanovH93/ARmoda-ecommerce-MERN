@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Container, Row, Col, Form, Card } from "react-bootstrap";
+import { Container, Row, Col, Form } from "react-bootstrap";
 import styles from "./CategoriesForm.module.scss";
 
 const categoriesList = [
