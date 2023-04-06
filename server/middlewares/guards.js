@@ -1,10 +1,8 @@
 function hasUser() {
   return (req, res, next) => {
     if (req.user) {
-      console.log(req.user);
       next();
     } else {
-      console.log("not user");
       res.status(401).json({ message: "Please Login" });
     }
   };

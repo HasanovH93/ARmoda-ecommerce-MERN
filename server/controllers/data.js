@@ -56,6 +56,9 @@ dataController.post("/create", s3UploadImg(), hasUser(), async (req, res) => {
       fullDescription: req.body.description,
       shortDescription: "dadadadada",
       rating: 5,
+      discount: 10,
+      offerEnd: "October 2, 2024 12:11:00",
+      saleCount: 55,
     };
 
     if (Object.values(data).some((v) => !v || v === null)) {
@@ -156,8 +159,6 @@ dataController.put("/edit/:id", s3UploadImg(), async (req, res) => {
       price: Number(req.body.price),
       imageUrls: req.body.imageUrls,
       facilities: req.body.facilities,
-      discount: 10,
-      offerEnd: "October 5, 2024 12:11:00",
     };
     if (Object.values(data).some((v) => !v || v === null)) {
       throw new Error(`All fields are required`);
@@ -166,6 +167,7 @@ dataController.put("/edit/:id", s3UploadImg(), async (req, res) => {
     const id = req.params.id;
     const userId = req.user._id;
     const UpdateData = await updateById(id, userId, data);
+    console.log(UpdateData);
     res.status(200).send({
       message: "Successfully uploaded " + req.files.length + " files!",
       UpdateData,

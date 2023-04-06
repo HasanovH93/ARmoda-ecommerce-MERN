@@ -15,5 +15,9 @@ module.exports = () => (req, res, next) => {
     }
   }
 
+  if (req.originalUrl === "/hotels/all-hotels" && req.method === "GET") {
+    console.log("here");
+    return next();
+  }
   next();
 };
