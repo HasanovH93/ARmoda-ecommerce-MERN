@@ -37,6 +37,8 @@ const hotelSchema = new Schema({
   category: [{ type: String }],
   shortDescription: { type: String },
   createdAt: { type: Date, default: Date.now },
+  discount: { type: number },
+  offerEnd: { type: Date },
 });
 
 const Hotel = model("Hotel", hotelSchema);

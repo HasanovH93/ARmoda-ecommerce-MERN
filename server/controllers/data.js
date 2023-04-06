@@ -31,8 +31,12 @@ const getNextSKU = () => {
 
 dataController.post("/create", s3UploadImg(), hasUser(), async (req, res) => {
   try {
-    console.log(req.body.categories.split(","));
     req.body = JSON.parse(JSON.stringify(req.body));
+
+    const categories = JSON.parse(req.body.categories);
+    const splitCategories = categories.map((category) =>
+      category.trim().replace(/\s+/g, "-").toLowerCase()
+    );
 
     req.body.imageUrls = req.files.map((img) => img.location);
 
@@ -48,7 +52,7 @@ dataController.post("/create", s3UploadImg(), hasUser(), async (req, res) => {
       image: req.body.imageUrls,
       new: createdAt > oneWeekAgo,
       variation,
-      category: JSON.parse(req.body.categories.split(",")),
+      category: splitCategories,
       fullDescription: req.body.description,
       shortDescription: "dadadadada",
       rating: 5,
@@ -152,6 +156,8 @@ dataController.put("/edit/:id", s3UploadImg(), async (req, res) => {
       price: Number(req.body.price),
       imageUrls: req.body.imageUrls,
       facilities: req.body.facilities,
+      discount: 10,
+      offerEnd: "October 5, 2024 12:11:00",
     };
     if (Object.values(data).some((v) => !v || v === null)) {
       throw new Error(`All fields are required`);
