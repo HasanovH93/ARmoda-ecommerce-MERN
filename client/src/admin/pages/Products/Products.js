@@ -1,21 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchProducts } from "../../../store/slices/product-slice";
 import ProductList from "../../components/Products/ProductList";
-import { fetchAllProducts } from "../../../api";
 import styles from "./Products.module.scss";
 
 const ProductPage = () => {
-  const [products, setProducts] = useState([]);
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.product.products);
   const sidebarOpen = useSelector((state) => state.sidebar.sidebarOpen);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const allProducts = await fetchAllProducts();
-      setProducts(allProducts);
-    };
-
-    fetchData();
-  }, []);
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
   return (
     <div

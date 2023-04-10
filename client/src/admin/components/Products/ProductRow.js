@@ -1,14 +1,12 @@
 import { Button } from "react-bootstrap";
-import { deleteProductById } from "../../../api";
+import { useDispatch } from "react-redux";
+import { deleteProduct } from "../../../store/slices/product-slice";
 
 const ProductRow = ({ product }) => {
-  const handleDeleteProduct = async (id) => {
-    try {
-      await deleteProductById(id);
-      window.location.reload();
-    } catch (error) {
-      console.error("Error deleting product:", error);
-    }
+  const dispatch = useDispatch();
+
+  const handleDeleteProduct = (id) => {
+    dispatch(deleteProduct(id));
   };
   return (
     <tr>
