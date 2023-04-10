@@ -2,6 +2,12 @@ import { Table } from "react-bootstrap";
 import ProductRow from "./ProductRow";
 
 const ProductList = ({ products }) => {
+  console.log("products", products);
+
+  if (!Array.isArray(products)) {
+    return null;
+  }
+
   return (
     <Table responsive striped bordered hover>
       <thead>
@@ -14,8 +20,8 @@ const ProductList = ({ products }) => {
         </tr>
       </thead>
       <tbody>
-        {products.map((product) => (
-          <ProductRow key={product.id} product={product} />
+        {products?.map((product) => (
+          <ProductRow key={product._id} product={product} />
         ))}
       </tbody>
     </Table>

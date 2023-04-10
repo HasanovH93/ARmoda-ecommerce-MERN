@@ -39,7 +39,7 @@ const CategoriesForm = ({ categories, setCategories }) => {
                 id={`category-${index}`}
                 label={category}
                 name={category}
-                checked={categories.includes(category)}
+                checked={categories.includes(category) ? "true" : ""}
                 onChange={handleCategoryChange}
                 className={styles.checkboxContainer}
               />

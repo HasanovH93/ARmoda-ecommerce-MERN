@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import { Form, Button, Row, Col } from "react-bootstrap";
 import ImageDropzone from "../ImageDropzone/ImageDropzone";
 import api from "../../../../api";
@@ -14,7 +16,10 @@ const ProductForm = () => {
     description: "",
     price: "",
     files: [],
+    variations: [],
+    categories: [],
   });
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -43,6 +48,7 @@ const ProductForm = () => {
     try {
       const response = await api.post("/hotels/create", formData);
       dispatch(setProducts(response.data.createdData));
+      navigate("/dashboard/all-products");
     } catch (error) {
       console.error("Error while adding hotel:", error);
     }

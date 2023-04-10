@@ -118,7 +118,7 @@ const VariationForm = ({ variations, setVariations }) => {
                           (
                             variation.size.find(
                               (sizeObj) => sizeObj.name === size
-                            ) || { stock: 0 }
+                            ) || { stock: "" }
                           ).stock
                         }
                         onChange={(e) =>
