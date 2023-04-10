@@ -1,31 +1,30 @@
 import React, { useState } from "react";
-import { useDropzone } from "react-dropzone";
 import { Row, Col, Form } from "react-bootstrap";
+import { FiUpload } from "react-icons/fi";
+import { BsTrash } from "react-icons/bs";
 import styles from "./ImageDropzone.module.scss";
 
 const ImageDropzone = ({ product, setProduct }) => {
   const [acceptedFiles, setAcceptedFiles] = useState([]);
   const [uploadedImages, setUploadedImages] = useState([]);
 
-  const { getRootProps, getInputProps } = useDropzone({
-    accept: "image/*",
-    maxFiles: 5,
-    onDrop: (acceptedFiles) => {
-      setAcceptedFiles((prevFiles) => [...prevFiles, ...acceptedFiles]);
+  const handleFilesChange = (event) => {
+    const newAcceptedFiles = [...event.target.files];
 
-      setProduct((prevProduct) => {
-        return {
-          ...prevProduct,
-          files: [...prevProduct.files, ...acceptedFiles],
-        };
-      });
+    setAcceptedFiles((prevFiles) => [...prevFiles, ...newAcceptedFiles]);
 
-      setUploadedImages((prevImages) => [
-        ...prevImages,
-        ...acceptedFiles.map((file) => URL.createObjectURL(file)),
-      ]);
-    },
-  });
+    setProduct((prevProduct) => {
+      return {
+        ...prevProduct,
+        files: [...prevProduct.files, ...newAcceptedFiles],
+      };
+    });
+
+    setUploadedImages((prevImages) => [
+      ...prevImages,
+      ...newAcceptedFiles.map((file) => URL.createObjectURL(file)),
+    ]);
+  };
 
   const removeImage = (index) => {
     setAcceptedFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
@@ -43,18 +42,26 @@ const ImageDropzone = ({ product, setProduct }) => {
       <Row>
         <Col>
           <Form.Group className="mb-0">
-            <div {...getRootProps()} className={styles.dropzone}>
-              <input {...getInputProps()} />
-              <p>Drag 'n' drop up to 5 images here, or click to select files</p>
+            <div className={styles.dropzone}>
+              <label htmlFor="uploadInput">
+                <FiUpload className={styles.uploadIcon} />
+                Upload Image
+              </label>
+              <input
+                id="uploadInput"
+                type="file"
+                accept="image/*"
+                multiple
+                onChange={handleFilesChange}
+              />
             </div>
           </Form.Group>
         </Col>
       </Row>
-      <Row>
+      <Row className={styles.uploadedFilesContainer}>
         {acceptedFiles.map((file, index) => (
-          <Col xs={12} md={4} key={file.name}>
+          <Col xs={6} md={4} lg={2} key={file.name}>
             <div className={styles.uploadedFile}>
-              <p className={styles.uploadedFileName}>{file.name}</p>
               {uploadedImages[index] && (
                 <img
                   src={uploadedImages[index]}
@@ -66,7 +73,7 @@ const ImageDropzone = ({ product, setProduct }) => {
                 className={`btn ${styles.removeImageButton}`}
                 onClick={() => removeImage(index)}
               >
-                X
+                <BsTrash />
               </button>
             </div>
           </Col>

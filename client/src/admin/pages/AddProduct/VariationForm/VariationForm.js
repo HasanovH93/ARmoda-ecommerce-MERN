@@ -1,5 +1,5 @@
 import React from "react";
-import ImageDropzone from "../ImageDropzone/ImageDropzone";
+import { BsTrash } from "react-icons/bs";
 
 const VariationForm = ({ variations, setVariations }) => {
   const addVariation = () => {
@@ -66,7 +66,7 @@ const VariationForm = ({ variations, setVariations }) => {
               className="remove-variation-button"
               onClick={() => removeVariation(index)}
             >
-              X
+              <BsTrash />
             </button>
           )}
           <label>
@@ -135,15 +135,6 @@ const VariationForm = ({ variations, setVariations }) => {
               );
             })}
           </div>
-          <label>
-            Image URL:
-            <ImageDropzone
-              product={variation}
-              setProduct={(updatedProduct) =>
-                handleInputChange(index, "image", updatedProduct.image)
-              }
-            />
-          </label>
         </div>
       ))}
       <button type="button" onClick={addVariation}>

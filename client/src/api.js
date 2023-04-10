@@ -10,10 +10,17 @@ const api = axios.create({
 // Add a request interceptor to set the Authorization header for all requests
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token");
+    const publicRoutes = ["/hotels/all-hotels"]; // Add other public routes here
+    const isPublicRoute = publicRoutes.some((route) =>
+      config.url.startsWith(route)
+    );
 
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+    if (!isPublicRoute) {
+      const token = localStorage.getItem("token");
+
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
     }
 
     if (config.data instanceof FormData) {

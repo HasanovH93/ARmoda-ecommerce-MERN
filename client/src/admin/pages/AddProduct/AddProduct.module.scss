@@ -1,4 +1,4 @@
-.addProduct {
+.container {
   max-width: calc(100% - 240px);
   margin: 0 auto;
   padding: 1rem;
@@ -8,13 +8,4 @@
 .sidebarOpen {
   margin-left: 240px;
 }
-
-@media (max-width: 768px) {
-  .addProduct {
-    max-width: 100%;
-  }
-
-  .sidebarOpen {
-    margin-left: 0;
-  }
-}
+ 

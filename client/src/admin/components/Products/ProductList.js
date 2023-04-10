@@ -2,8 +2,6 @@ import { Table } from "react-bootstrap";
 import ProductRow from "./ProductRow";
 
 const ProductList = ({ products }) => {
-  console.log("products", products);
-
   if (!Array.isArray(products)) {
     return null;
   }
