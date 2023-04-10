@@ -22,6 +22,7 @@ import currencyReducer from "./slices/currency-slice";
 import cartReducer from "./slices/cart-slice";
 import compareReducer from "./slices/compare-slice";
 import wishlistReducer from "./slices/wishlist-slice";
+import sidebarSlice from "./slices/sidebar-slice";
 
 const persistConfig = {
   key: "flone",
@@ -36,6 +37,7 @@ export const rootReducer = combineReducers({
   compare: compareReducer,
   wishlist: wishlistReducer,
   auth: authReducer,
+  sidebar: sidebarSlice,
   error: errorReducer,
 });
 

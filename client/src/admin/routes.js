@@ -3,6 +3,7 @@ import Dashboard from "./pages/Dasboard/Dashboard";
 import Login from "./pages/Login/Login";
 
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import ProductList from "./pages/Products/Products";
 
 const adminRoutes = [
   {
@@ -12,6 +13,10 @@ const adminRoutes = [
       {
         path: "add-product",
         element: <AddProduct />,
+      },
+      {
+        path: "all-products",
+        element: <ProductList />,
       },
     ],
   },

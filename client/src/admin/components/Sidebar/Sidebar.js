@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleSidebar } from "../../../store/slices/sidebar-slice";
 import { Link } from "react-router-dom";
 import Logo from "../../../components/header/Logo";
 import {
@@ -10,10 +11,11 @@ import {
 import styles from "./Sidebar.module.scss";
 
 const Sidebar = () => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const isCollapsed = useSelector((state) => state.sidebar.sidebarOpen);
+  const dispatch = useDispatch();
 
-  const toggleSidebar = () => {
-    setIsCollapsed(!isCollapsed);
+  const handleToggleSidebar = () => {
+    dispatch(toggleSidebar());
   };
 
   return (
@@ -34,7 +36,7 @@ const Sidebar = () => {
           </Link>
         </li>
         <li className={styles.sidebarListItem}>
-          <Link to="/admin-panel/products" className={styles.sidebarLink}>
+          <Link to="/dashboard/all-products" className={styles.sidebarLink}>
             <MdProductionQuantityLimits className={styles.sidebarIcon} />
             <span className={styles.sidebarText}>Products</span>
           </Link>
@@ -52,7 +54,7 @@ const Sidebar = () => {
           </Link>
         </li>
       </ul>
-      <button className={styles.toggleSidebar} onClick={toggleSidebar}>
+      <button className={styles.toggleSidebar} onClick={handleToggleSidebar}>
         <i className={`fa fa-chevron-left ${styles.toggleSidebarIcon}`}></i>
       </button>
     </div>

@@ -1,0 +1,12 @@
+.container {
+  max-width: calc(
+    100% - 240px
+  ); /* Adjust this value based on your sidebar width */
+  margin: 0 auto;
+  padding: 1rem;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.sidebarOpen {
+  margin-left: 240px; /* Adjust this value to match your sidebar width */
+}
