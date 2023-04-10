@@ -15,6 +15,7 @@ const ProductList = ({ products }) => {
           <th>Product Image</th>
           <th>Product Name</th>
           <th>Product Price</th>
+          <th>Product Description</th>
           <th>Edit</th>
           <th>Delete</th>
         </tr>

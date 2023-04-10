@@ -34,7 +34,7 @@ const CategoriesForm = ({ categories, setCategories }) => {
           <Col sm={6} key={index} className={styles.categoryCol}>
             <div className={styles.cardWrapper}>
               <Form.Check
-                custom
+                custom="true"
                 type="checkbox"
                 id={`category-${index}`}
                 label={category}

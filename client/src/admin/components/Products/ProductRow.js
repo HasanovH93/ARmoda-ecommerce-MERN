@@ -15,6 +15,7 @@ const ProductRow = ({ product }) => {
       </td>
       <td>{product.name}</td>
       <td>{product.price}</td>
+      <td>{product.fullDescription}</td>
       <td>
         <Button variant="primary">Edit</Button>
       </td>
