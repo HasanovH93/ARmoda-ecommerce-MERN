@@ -1,4 +1,4 @@
-.variation-form {
+.variationForm {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -13,7 +13,7 @@
     flex-direction: column;
     gap: 0.5rem;
 
-    .remove-variation-button {
+    .removeVariationButton {
       position: absolute;
       top: 0.5rem;
       right: 0.5rem;
@@ -67,7 +67,7 @@
         align-items: center;
       }
 
-      .stock-for {
+      .stockFor {
         display: flex;
         flex-direction: column;
         align-items: flex-start;

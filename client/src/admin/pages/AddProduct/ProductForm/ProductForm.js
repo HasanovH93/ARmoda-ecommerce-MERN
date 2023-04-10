@@ -7,8 +7,9 @@ import ImageDropzone from "../ImageDropzone/ImageDropzone";
 import api from "../../../../api";
 import VariationForm from "../VariationForm/VariationForm";
 import { setProducts } from "../../../../store/slices/product-slice";
-import CategoriesForm from "../CategoriesForm/CategoriesForm";
 import styles from "./ProductForm.module.scss";
+import SelectionForm from "../SelectionForm/SelectionForm";
+import { categoriesList, tagsList } from "../../../data/data";
 
 const ProductForm = () => {
   const [product, setProduct] = useState({
@@ -18,6 +19,7 @@ const ProductForm = () => {
     files: [],
     variations: [],
     categories: [],
+    tags: [],
   });
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -31,14 +33,18 @@ const ProductForm = () => {
     e.preventDefault();
 
     const formData = new FormData();
-    const completeProduct = { ...product, variations, categories };
+    const completeProduct = { ...product, variations, categories, tags };
 
     Object.entries(completeProduct).forEach(([key, value]) => {
       if (key === "files") {
         value.forEach((file) => {
           formData.append("img", file);
         });
-      } else if (key === "variations" || key === "categories") {
+      } else if (
+        key === "variations" ||
+        key === "categories" ||
+        key === "tags"
+      ) {
         formData.append(key, JSON.stringify(value));
       } else {
         formData.append(key, value);
@@ -46,7 +52,9 @@ const ProductForm = () => {
     });
 
     try {
+      console.log(formData);
       const response = await api.post("/hotels/create", formData);
+      console.log(response.data);
       dispatch(setProducts(response.data.createdData));
       navigate("/dashboard/all-products");
     } catch (error) {
@@ -57,6 +65,7 @@ const ProductForm = () => {
   const [variations, setVariations] = useState([{ color: "", size: [] }]);
 
   const [categories, setCategories] = useState([]);
+  const [tags, setTags] = useState([]);
 
   return (
     <Container>
@@ -116,17 +125,27 @@ const ProductForm = () => {
 
         <Form.Group controlId="variationsAndCategories">
           <Row>
-            <Col sm={8}>
+            <Col sm={12} md={6}>
               <Form.Label>Product Variations:</Form.Label>
               <VariationForm
                 variations={variations}
                 setVariations={setVariations}
               />
             </Col>
-            <Col sm={4}>
-              <CategoriesForm
-                categories={categories}
-                setCategories={setCategories}
+            <Col sm={12} md={3}>
+              <SelectionForm
+                title="Categories"
+                items={categoriesList}
+                selectedItems={categories}
+                setSelectedItems={setCategories}
+              />
+            </Col>
+            <Col sm={12} md={3}>
+              <SelectionForm
+                title="Tags"
+                items={tagsList}
+                selectedItems={tags}
+                setSelectedItems={setTags}
               />
             </Col>
           </Row>

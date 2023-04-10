@@ -1,5 +1,6 @@
 import React from "react";
 import { BsTrash } from "react-icons/bs";
+import styles from "./VariationForm.module.scss";
 
 const VariationForm = ({ variations, setVariations }) => {
   const addVariation = () => {
@@ -57,13 +58,13 @@ const VariationForm = ({ variations, setVariations }) => {
     });
   };
   return (
-    <div className="variation-form">
+    <div className={styles.variationForm}>
       {variations.map((variation, index) => (
-        <div key={index} className="variation">
+        <div key={index} className={styles.variation}>
           {index > 0 && (
             <button
               type="button"
-              className="remove-variation-button"
+              className={styles.removeVariationButton}
               onClick={() => removeVariation(index)}
             >
               <BsTrash />
@@ -85,9 +86,9 @@ const VariationForm = ({ variations, setVariations }) => {
               <option value="white">white</option>
             </select>
           </label>
-          <div className="sizes">
+          <div className={styles.sizes}>
             Sizes:
-            {["x", "m", "xxl", "s"].map((size) => {
+            {["x", "m", "xxl", "s", "xxxl", "xs"].map((size) => {
               const isChecked = variation.size.some(
                 (sizeObj) => sizeObj.name === size
               );
@@ -110,7 +111,7 @@ const VariationForm = ({ variations, setVariations }) => {
                     {size}
                   </label>
                   {isChecked && (
-                    <label className="stock-for">
+                    <label className={styles.stockFor}>
                       Stock:
                       <input
                         type="number"
