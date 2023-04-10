@@ -1,6 +1,15 @@
 import { Button } from "react-bootstrap";
+import { deleteProductById } from "../../../api";
 
 const ProductRow = ({ product }) => {
+  const handleDeleteProduct = async (id) => {
+    try {
+      await deleteProductById(id);
+      window.location.reload();
+    } catch (error) {
+      console.error("Error deleting product:", error);
+    }
+  };
   return (
     <tr>
       <td>
@@ -12,7 +21,12 @@ const ProductRow = ({ product }) => {
         <Button variant="primary">Edit</Button>
       </td>
       <td>
-        <Button variant="danger">Delete</Button>
+        <Button
+          variant="danger"
+          onClick={() => handleDeleteProduct(product._id)}
+        >
+          Delete
+        </Button>
       </td>
     </tr>
   );

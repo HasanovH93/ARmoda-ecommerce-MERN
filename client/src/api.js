@@ -52,4 +52,13 @@ export const fetchAllProducts = async () => {
   }
 };
 
+export const deleteProductById = async (id) => {
+  try {
+    const response = await api.delete(`/hotels/product/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting product:", error);
+  }
+};
+
 export default api;

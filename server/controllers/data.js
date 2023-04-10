@@ -103,37 +103,11 @@ dataController.get("/details/:id", async (req, res) => {
   }
 });
 
-dataController.delete("/details/:id", async (req, res) => {
+dataController.delete("/product/:id", async (req, res) => {
   try {
-    console.log("DELETE");
     const id = req.params.id;
     const data = await deleteById(id);
     res.status(200).send({ data });
-  } catch (error) {
-    const message = parseError(error);
-    res.status(400).json({ message });
-  }
-});
-
-dataController.put("/details/like/:id", hasUser(), async (req, res) => {
-  try {
-    console.log("GET");
-    const userId = req.user._id;
-    const hotelId = req.params.id;
-    await likeHotel(userId, hotelId);
-    res.status(200).json("success");
-  } catch (error) {
-    const message = parseError(error);
-    res.status(400).json({ message });
-  }
-});
-
-dataController.get("/likes", async (req, res) => {
-  try {
-    const userId = req.user._id;
-
-    const hotels = await getByIdHotels(userId);
-    res.status(200).send(hotels.likedHotels);
   } catch (error) {
     const message = parseError(error);
     res.status(400).json({ message });
@@ -194,44 +168,6 @@ dataController.post("/search", async (req, res) => {
     }, {});
     const data = await search(query);
     res.status(200).send(data);
-  } catch (error) {
-    const message = parseError(error);
-    res.status(400).send({ message });
-  }
-});
-
-dataController.post("/reservation", async (req, res) => {
-  try {
-    const data = {
-      checkIn: req.body.checkIn.split("T")[0],
-      checkOut: req.body.checkOut.split("T")[0],
-      guests: req.body.guests,
-    };
-    console.log(data);
-    if (Object.values(data).some((v) => !v || v === "")) {
-      throw new Error(`All fields are required`);
-    }
-
-    data.hotel = req.body.hotel;
-
-    const createdReservation = await createBooking(data, req.user._id);
-    console.log(createdReservation);
-    res.status(200).send({
-      message: "Successfully booked this hotel. ",
-      createdReservation,
-    });
-  } catch (error) {
-    const message = parseError(error);
-    res.status(400).send({ message });
-  }
-});
-
-dataController.get("/reservations", async (req, res) => {
-  try {
-    const userId = req.user._id;
-
-    const hotels = await getByIdHReservations(userId);
-    res.status(200).send(hotels.reservations);
   } catch (error) {
     const message = parseError(error);
     res.status(400).send({ message });
