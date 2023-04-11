@@ -2,8 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import ProductForm from "./ProductForm/ProductForm";
 import styles from "./AddProduct.module.scss";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { Row, Col } from "react-bootstrap";
 
 const AddProduct = () => {
   const sidebarOpen = useSelector((state) => state.sidebar.sidebarOpen);
@@ -16,6 +15,10 @@ const AddProduct = () => {
       <Row>
         <Col>
           <h2 className={styles.title}>Add Product</h2>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
           <ProductForm />
         </Col>
       </Row>

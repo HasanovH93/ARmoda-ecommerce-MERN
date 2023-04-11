@@ -11,11 +11,12 @@ import styles from "./ProductForm.module.scss";
 import SelectionForm from "../SelectionForm/SelectionForm";
 import { categoriesList, tagsList } from "../../../data/data";
 
-const ProductForm = () => {
+const ProductForm = ({ }) => {
   const [product, setProduct] = useState({
     productName: "",
     description: "",
     price: "",
+    discount: "",
     files: [],
     variations: [],
     categories: [],
@@ -69,10 +70,10 @@ const ProductForm = () => {
 
   return (
     <Container>
-      <Form onSubmit={handleSubmit} className="createForm">
+      <Form onSubmit={handleSubmit} className={styles.createForm}>
         <Row>
           <Row>
-            <Col>
+            <Col sm={12} md={4}>
               <Form.Group controlId="productName">
                 <Form.Label className={styles.label}>Product Name:</Form.Label>
                 <Form.Control
@@ -84,7 +85,7 @@ const ProductForm = () => {
                 />
               </Form.Group>
             </Col>
-            <Col>
+            <Col sm={12} md={8}>
               <Form.Group controlId="description">
                 <Form.Label className={styles.label}>Description:</Form.Label>
                 <Form.Control
@@ -100,7 +101,7 @@ const ProductForm = () => {
         </Row>
 
         <Row>
-          <Col>
+          <Col sm={12} md={2}>
             <Form.Group controlId="price">
               <Form.Label>Price:</Form.Label>
               <Form.Control
@@ -113,7 +114,20 @@ const ProductForm = () => {
               />
             </Form.Group>
           </Col>
-          <Col>
+          <Col sm={12} md={2}>
+            <Form.Group controlId="discount">
+              <Form.Label>Discount:</Form.Label>
+              <Form.Control
+                type="number"
+                step="0.01"
+                name="discount"
+                value={product.discount}
+                onChange={handleChange}
+                required
+              />
+            </Form.Group>
+          </Col>
+          <Col sm={12} md={8}>
             <Form.Group controlId="image">
               <Form.Label>Product Image:</Form.Label>
               <div className="image-dropzone-container">
@@ -150,9 +164,15 @@ const ProductForm = () => {
             </Col>
           </Row>
         </Form.Group>
-        <Button variant="primary" type="submit">
-          Add Product
-        </Button>
+        <div className={styles.centerButton}>
+          <Button
+            variant="primary"
+            type="submit"
+            className={`${styles.addButton}`}
+          >
+            Add Product
+          </Button>
+        </div>
       </Form>
     </Container>
   );

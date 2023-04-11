@@ -3,6 +3,10 @@
   margin: 0 auto;
   padding: 1rem;
   transition: margin-left 0.3s ease-in-out;
+  .title {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
 }
 
 .sidebarOpen {

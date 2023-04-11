@@ -2,7 +2,7 @@ import { Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { deleteProduct } from "../../../store/slices/product-slice";
 
-const ProductRow = ({ product }) => {
+const ProductRow = ({ product, onEditProduct }) => {
   const dispatch = useDispatch();
 
   const handleDeleteProduct = (id) => {
@@ -17,7 +17,9 @@ const ProductRow = ({ product }) => {
       <td>{product.price}</td>
       <td>{product.fullDescription}</td>
       <td>
-        <Button variant="primary">Edit</Button>
+        <Button variant="primary" onClick={() => onEditProduct(product)}>
+          Edit
+        </Button>
       </td>
       <td>
         <Button

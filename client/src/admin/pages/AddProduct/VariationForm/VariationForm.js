@@ -70,9 +70,10 @@ const VariationForm = ({ variations, setVariations }) => {
               <BsTrash />
             </button>
           )}
-          <label>
+          <label className={styles.colorLabel}>
             Color:
             <select
+              className={styles.colorSelect}
               value={variation.color}
               onChange={(e) =>
                 handleInputChange(index, "color", e.target.value)
@@ -93,9 +94,10 @@ const VariationForm = ({ variations, setVariations }) => {
                 (sizeObj) => sizeObj.name === size
               );
               return (
-                <div key={size}>
-                  <label>
+                <div key={size} className={styles.sizeWrapper}>
+                  <label className={styles.sizeLabel}>
                     <input
+                      className={styles.sizeCheckbox}
                       type="checkbox"
                       value={size}
                       checked={isChecked}
@@ -114,6 +116,7 @@ const VariationForm = ({ variations, setVariations }) => {
                     <label className={styles.stockFor}>
                       Stock:
                       <input
+                        className={styles.stockInput}
                         type="number"
                         value={
                           (
@@ -138,7 +141,11 @@ const VariationForm = ({ variations, setVariations }) => {
           </div>
         </div>
       ))}
-      <button type="button" onClick={addVariation}>
+      <button
+        className={styles.addVariationButton}
+        type="button"
+        onClick={addVariation}
+      >
         Add More Variations
       </button>
     </div>

@@ -1,7 +1,9 @@
 import { Table } from "react-bootstrap";
+import { useState } from "react";
 import ProductRow from "./ProductRow";
 
 const ProductList = ({ products }) => {
+  const [editedProduct, setEditedProduct] = useState(null);
   if (!Array.isArray(products)) {
     return null;
   }
@@ -20,7 +22,11 @@ const ProductList = ({ products }) => {
       </thead>
       <tbody>
         {products?.map((product) => (
-          <ProductRow key={product._id} product={product} />
+          <ProductRow
+            key={product._id}
+            onEditProduct={(product) => setEditedProduct(product)}
+            product={product}
+          />
         ))}
       </tbody>
     </Table>
