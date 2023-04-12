@@ -22,12 +22,10 @@ const Cart = () => {
 
   const currency = useSelector((state) => state.currency);
   const { cartItems } = useSelector((state) => state.cart);
+
   return (
     <Fragment>
-      <SEO
-        titleTemplate="Cart"
-        description="Cart page of flone react minimalist eCommerce template."
-      />
+      <SEO titleTemplate="Cart" description="Cart page of Armoda" />
 
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}
@@ -236,42 +234,13 @@ const Cart = () => {
                     <div className="cart-tax">
                       <div className="title-wrap">
                         <h4 className="cart-bottom-title section-bg-gray">
-                          Estimate Shipping And Tax
+                          Estimate Shipping And Tax: {currency.currencySymbol}
                         </h4>
                       </div>
                       <div className="tax-wrapper">
                         <p>
                           Enter your destination to get a shipping estimate.
                         </p>
-                        <div className="tax-select-wrapper">
-                          <div className="tax-select">
-                            <label>* Country</label>
-                            <select className="email s-email s-wid">
-                              <option>Bangladesh</option>
-                              <option>Albania</option>
-                              <option>Åland Islands</option>
-                              <option>Afghanistan</option>
-                              <option>Belgium</option>
-                            </select>
-                          </div>
-                          <div className="tax-select">
-                            <label>* Region / State</label>
-                            <select className="email s-email s-wid">
-                              <option>Bangladesh</option>
-                              <option>Albania</option>
-                              <option>Åland Islands</option>
-                              <option>Afghanistan</option>
-                              <option>Belgium</option>
-                            </select>
-                          </div>
-                          <div className="tax-select">
-                            <label>* Zip/Postal Code</label>
-                            <input type="text" />
-                          </div>
-                          <button className="cart-btn-2" type="submit">
-                            Get A Quote
-                          </button>
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -307,6 +276,9 @@ const Cart = () => {
                         <span>
                           {currency.currencySymbol + cartTotalPrice.toFixed(2)}
                         </span>
+                      </h5>
+                      <h5>
+                        Shipment <span>{currency.currencySymbol + 5.0}</span>
                       </h5>
 
                       <h4 className="grand-totall-title">

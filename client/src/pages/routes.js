@@ -7,7 +7,6 @@ const ShopGridStandard = lazy(() => import("./shop/ShopGridStandard"));
 
 const ProductTabLeft = lazy(() => import("./shop-product/ProductTabLeft"));
 
-const About = lazy(() => import("./other/About"));
 const Contact = lazy(() => import("./other/Contact"));
 const MyAccount = lazy(() => import("./other/MyAccount"));
 const LoginRegister = lazy(() => import("./other/LoginRegister"));
@@ -23,10 +22,6 @@ const routes = [
   {
     path: "/",
     renderer: (params = {}) => <HomeKidsFashion {...params} />,
-  },
-  {
-    path: "/about",
-    renderer: (params = {}) => <About {...params} />,
   },
   {
     path: "/checkout",

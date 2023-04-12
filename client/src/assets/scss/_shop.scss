@@ -299,6 +299,55 @@
   }
 }
 
+.list2-col-style {
+  .shop-list-wrap {
+    .shop-list-content {
+      @media #{$xl-layout} {
+        h3 {
+          font-size: 20px;
+          line-height: 20px;
+        }
+        .product-list-price {
+          margin: 13px 0 10px;
+        }
+        p {
+          margin: 6px 0 20px;
+        }
+        .shop-list-btn {
+          a {
+            font-size: 13px;
+
+            padding: 10px 24px 11px;
+          }
+        }
+      }
+      @media #{$lg-layout} {
+        h3 {
+          font-size: 20px;
+          line-height: 20px;
+        }
+        .product-list-price {
+          margin: 13px 0 10px;
+        }
+        p {
+          margin: 6px 0 20px;
+        }
+        .shop-list-btn {
+          a {
+            font-size: 13px;
+
+            padding: 10px 20px 11px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.grid-sizer {
+  width: 25%;
+}
+
 .shop-bottom-area {
   .col-xl-4 {
     transition: 0.5s;

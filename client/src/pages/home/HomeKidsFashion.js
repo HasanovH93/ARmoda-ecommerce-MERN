@@ -23,7 +23,7 @@ const HomeFashion = () => {
         <BannerFourteen spaceTopClass="pt-95" spaceBottomClass="pb-70" />
         {/* tab product */}
         <TabProductEleven
-          category="kids"
+          category="dresses"
           spaceTopClass="pt-100"
           spaceBottomClass="pb-100"
           sectionTitle="Featured Products"
@@ -46,7 +46,7 @@ const HomeFashion = () => {
         />
         {/* tab product */}
         <TabProductTwelve
-          category="kids"
+          category="dresses"
           spaceTopClass="pt-95"
           sectionTitle="Best Products"
         />

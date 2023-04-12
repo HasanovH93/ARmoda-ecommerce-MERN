@@ -33,6 +33,7 @@ export const getDiscountPrice = (price, discount) => {
 
 // get product cart quantity
 export const getProductCartQuantity = (cartItems, product, color, size) => {
+  console.log(color, size);
   let productInCart = cartItems.find(
     (single) =>
       single._id === product._id &&
@@ -58,6 +59,7 @@ export const getProductCartQuantity = (cartItems, product, color, size) => {
 };
 
 export const cartItemStock = (item, color, size) => {
+  console.log("item" + JSON.stringify(item, null, 2));
   if (item.stock) {
     return item.stock;
   } else {

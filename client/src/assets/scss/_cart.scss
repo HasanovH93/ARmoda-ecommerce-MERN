@@ -327,11 +327,12 @@ h3.cart-page-title {
           cursor: pointer;
 
           color: #242424;
+//background: #fff url("../../assets/img/icon-img/cart.png") no-repeat scroll right 18px center;
           border: 1px solid #ebebeb;
           box-shadow: none;
 
           -webkit-appearance: none;
-          -moz-appearance: none;
+             -moz-appearance: none;
         }
         input {
           height: 40px;
@@ -451,7 +452,50 @@ h3.cart-page-title {
       float: right;
     }
   }
+  .total-shipping {
+    margin: 0 0 27px;
+    padding: 28px 0;
 
+    border-top: 1px solid #ebebeb;
+    border-bottom: 1px solid #ebebeb;
+    h5 {
+      font-size: 14px;
+
+      margin: 0;
+    }
+    ul {
+      padding: 19px 0 0 0;
+      li {
+        margin: 0 0 6px;
+
+        list-style: outside none none;
+
+        color: #242424;
+        &:last-child {
+          margin: 0 0 0;
+        }
+        input {
+          position: relative;
+          top: 2px;
+
+          width: 13px;
+          height: 13px;
+          margin-right: 10px;
+          padding: 0;
+
+          cursor: pointer;
+
+          color: #626262;
+          border: 1px solid #d7d7d7;
+          border-radius: 5px !important;
+          background: #e9e9e9 none repeat scroll 0 0;
+        }
+        span {
+          float: right;
+        }
+      }
+    }
+  }
   h4.grand-totall-title {
     font-size: 20px;
     font-weight: 500;

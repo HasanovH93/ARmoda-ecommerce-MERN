@@ -69,6 +69,13 @@
                 width: auto;
               }
             }
+            & .category {
+              float: left;
+              clear: both;
+              color: $theme-color;
+              text-transform: capitalize;
+              letter-spacing: 0.5px;
+            }
             & .product-title {
               display: block;
               overflow: hidden;
@@ -83,6 +90,33 @@
                 width: 100%;
                 &:hover {
                   color: $theme-color;
+                }
+              }
+            }
+            .compare-btn {
+              margin: 14px 0 0;
+              a,
+              button {
+                background-color: $theme-color;
+                padding: 10px 15px;
+                border-radius: 50px;
+                color: #fff;
+                display: inline-block;
+                border: none;
+                &:hover,
+                &.active {
+                  background-color: #363f4d;
+                }
+
+                &:disabled {
+                  cursor: not-allowed;
+                }
+
+                &.disabled {
+                  opacity: 0.3;
+                  &:hover {
+                    background-color: #343538;
+                  }
                 }
               }
             }
@@ -107,8 +141,30 @@
               }
             }
           }
+          &.product-sku,
+          &.product-stock,
+          &.product-weight {
+            font-size: 13px;
+            font-weight: 400;
+          }
+          &.product-dimensions {
+            font-size: 13px;
+            font-weight: 400;
+          }
+
+          &.product-rating {
+            i {
+              color: #343538;
+              margin-right: 5px;
+
+              &.yellow {
+                color: #ffa900;
+              }
+            }
+          }
         }
       }
     }
   }
 }
+/*------ end Compare Page Wrapper -----*/
