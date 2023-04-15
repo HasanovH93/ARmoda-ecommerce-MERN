@@ -1,8 +1,9 @@
 import { Fragment, useState, useEffect } from "react";
 import Paginator from "react-hooks-paginator";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useLocation, useParams } from "react-router-dom";
 import { getSortedProducts } from "../../helpers/product";
+import { fetchProducts } from "../../store/slices/product-slice";
 import SEO from "../../components/seo";
 import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
@@ -22,6 +23,7 @@ const ShopGridStandard = ({ isNew = false }) => {
   const [sortedProducts, setSortedProducts] = useState([]);
   const { products } = useSelector((state) => state.product);
   const { category } = useParams();
+  const dispatch = useDispatch();
 
   const pageLimit = 12;
   let { pathname } = useLocation();
@@ -39,6 +41,10 @@ const ShopGridStandard = ({ isNew = false }) => {
     setFilterSortType(sortType);
     setFilterSortValue(sortValue);
   };
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
   useEffect(() => {
     let filteredProducts = products;

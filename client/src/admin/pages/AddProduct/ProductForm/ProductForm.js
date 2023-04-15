@@ -11,7 +11,7 @@ import styles from "./ProductForm.module.scss";
 import SelectionForm from "../SelectionForm/SelectionForm";
 import { categoriesList, tagsList } from "../../../data/data";
 
-const ProductForm = ({ }) => {
+const ProductForm = ({}) => {
   const [product, setProduct] = useState({
     productName: "",
     description: "",
@@ -55,7 +55,6 @@ const ProductForm = ({ }) => {
     try {
       console.log(formData);
       const response = await api.post("/hotels/create", formData);
-      console.log(response.data);
       dispatch(setProducts(response.data.createdData));
       navigate("/dashboard/all-products");
     } catch (error) {
