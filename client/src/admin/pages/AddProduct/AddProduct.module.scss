@@ -7,6 +7,14 @@
     text-align: center;
     margin-bottom: 2rem;
   }
+  .centerButton {
+    text-align: center;
+    margin-top: 2rem;
+    .addButton {
+      font-size: 1.25rem;
+      padding: 0.5rem 2.5rem;
+    }
+  }
 }
 
 .sidebarOpen {
