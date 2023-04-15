@@ -1,6 +1,8 @@
 import React from "react";
 import { BsTrash } from "react-icons/bs";
+import { colorOptions, sizeOptions } from "../../../data/data";
 import styles from "./VariationForm.module.scss";
+import useHandleInputChange from "../../../hooks/HandleInputChange";
 
 const VariationForm = ({ variations, setVariations }) => {
   const addVariation = () => {
@@ -10,53 +12,15 @@ const VariationForm = ({ variations, setVariations }) => {
     setVariations(variations.filter((_, i) => i !== index));
   };
 
-  const handleInputChange = (index, field, value, checked) => {
-    setVariations((prevVariations) => {
-      const updatedVariations = [...prevVariations];
-      const updatedVariation = { ...updatedVariations[index] };
-
-      if (field === "color") {
-        updatedVariation[field] = value;
-      } else if (field === "image") {
-        updatedVariation[field] = value;
-      } else if (field === "size") {
-        const sizeIndex = updatedVariation.size.findIndex(
-          (sizeObj) => sizeObj.name === value
-        );
-
-        if (checked) {
-          if (sizeIndex === -1) {
-            updatedVariation.size.push({ name: value, stock: "" });
-          }
-        } else {
-          if (sizeIndex !== -1) {
-            updatedVariation.size.splice(sizeIndex, 1);
-          }
-        }
-      } else if (field.startsWith("stock")) {
-        const sizeName = field.split("-")[1];
-        const sizeObjIndex = updatedVariation.size.findIndex(
-          (sizeObj) => sizeObj.name === sizeName
-        );
-
-        if (sizeObjIndex === -1 && value) {
-          updatedVariation.size.push({ name: sizeName, stock: value });
-        } else if (sizeObjIndex !== -1 && value) {
-          updatedVariation.size[sizeObjIndex].stock = value;
-        } else if (sizeObjIndex !== -1 && !value) {
-          updatedVariation.size.splice(sizeObjIndex, 1);
-        }
-      }
-      updatedVariation.size.forEach((sizeObj) => {
-        if (sizeObj.stock === "") {
-          delete sizeObj.stock;
-        }
-      });
-
-      updatedVariations[index] = updatedVariation;
-      return updatedVariations;
-    });
-  };
+  const handleInputChange = useHandleInputChange(
+    null,
+    null,
+    null,
+    null,
+    setVariations,
+    null,
+    null
+  );
   return (
     <div className={styles.variationForm}>
       {variations.map((variation, index) => (
@@ -76,20 +40,20 @@ const VariationForm = ({ variations, setVariations }) => {
               className={styles.colorSelect}
               value={variation.color}
               onChange={(e) =>
-                handleInputChange(index, "color", e.target.value)
+                handleInputChange("variations", index, "color", e.target.value)
               }
             >
               <option value="">Select a color</option>
-              <option value="red">red</option>
-              <option value="blue">blue</option>
-              <option value="green">green</option>
-              <option value="black">Black</option>
-              <option value="white">white</option>
+              {colorOptions.map((color) => (
+                <option key={color.value} value={color.value}>
+                  {color.label}
+                </option>
+              ))}
             </select>
           </label>
           <div className={styles.sizes}>
-            Sizes:
-            {["x", "m", "xxl", "s", "xxxl", "xs"].map((size) => {
+            <div>Sizes:</div>
+            {sizeOptions.map((size) => {
               const isChecked = variation.size.some(
                 (sizeObj) => sizeObj.name === size
               );
@@ -103,6 +67,7 @@ const VariationForm = ({ variations, setVariations }) => {
                       checked={isChecked}
                       onChange={(e) =>
                         handleInputChange(
+                          "variations",
                           index,
                           "size",
                           e.target.value,
@@ -127,6 +92,7 @@ const VariationForm = ({ variations, setVariations }) => {
                         }
                         onChange={(e) =>
                           handleInputChange(
+                            "variations",
                             index,
                             `stock-${size}`,
                             e.target.value

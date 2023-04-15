@@ -2,17 +2,18 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Container, Row, Col, Form } from "react-bootstrap";
 import styles from "./SelectionForm.module.scss";
+import useHandleInputChange from "../../../hooks/HandleInputChange";
 
 const SelectionForm = ({ title, items, selectedItems, setSelectedItems }) => {
-  const handleItemChange = (e) => {
-    const item = e.target.name;
-    const checked = e.target.checked;
-    if (checked) {
-      setSelectedItems([...selectedItems, item]);
-    } else {
-      setSelectedItems(selectedItems.filter((i) => i !== item));
-    }
-  };
+  const handleInputChange = useHandleInputChange(
+    null,
+    null,
+    selectedItems,
+    setSelectedItems,
+    null,
+    null,
+    null
+  );
 
   return (
     <Container className={styles.selectionContainer}>
@@ -28,7 +29,7 @@ const SelectionForm = ({ title, items, selectedItems, setSelectedItems }) => {
                 label={item}
                 name={item}
                 checked={selectedItems.includes(item) ? "true" : ""}
-                onChange={handleItemChange}
+                onChange={(event) => handleInputChange("item", event)}
                 className={styles.checkboxContainer}
               />
             </div>

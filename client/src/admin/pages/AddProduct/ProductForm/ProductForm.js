@@ -10,8 +10,9 @@ import { setProducts } from "../../../../store/slices/product-slice";
 import styles from "./ProductForm.module.scss";
 import SelectionForm from "../SelectionForm/SelectionForm";
 import { categoriesList, tagsList } from "../../../data/data";
+import useHandleInputChange from "../../../hooks/HandleInputChange";
 
-const ProductForm = ({}) => {
+const ProductForm = () => {
   const [product, setProduct] = useState({
     productName: "",
     description: "",
@@ -25,10 +26,15 @@ const ProductForm = ({}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setProduct({ ...product, [name]: value });
-  };
+  const handleInputChange = useHandleInputChange(
+    product,
+    setProduct,
+    null,
+    null,
+    null,
+    null,
+    null
+  );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -79,7 +85,7 @@ const ProductForm = ({}) => {
                   type="text"
                   name="productName"
                   value={product.productName}
-                  onChange={handleChange}
+                  onChange={(event) => handleInputChange("product", event)}
                   required
                 />
               </Form.Group>
@@ -91,7 +97,7 @@ const ProductForm = ({}) => {
                   as="textarea"
                   name="description"
                   value={product.description}
-                  onChange={handleChange}
+                  onChange={(event) => handleInputChange("product", event)}
                   required
                 />
               </Form.Group>
@@ -108,7 +114,7 @@ const ProductForm = ({}) => {
                 step="0.01"
                 name="price"
                 value={product.price}
-                onChange={handleChange}
+                onChange={(event) => handleInputChange("product", event)}
                 required
               />
             </Form.Group>
@@ -121,7 +127,7 @@ const ProductForm = ({}) => {
                 step="0.01"
                 name="discount"
                 value={product.discount}
-                onChange={handleChange}
+                onChange={(event) => handleInputChange("product", event)}
                 required
               />
             </Form.Group>

@@ -11,7 +11,12 @@ const ProductRow = ({ product, onEditProduct }) => {
   return (
     <tr>
       <td>
-        <img src={product.image} alt={product.name} width="100" height="100" />
+        <img
+          src={product.image[0]}
+          alt={product.name}
+          width="100"
+          height="100"
+        />
       </td>
       <td>{product.name}</td>
       <td>{product.price}</td>

@@ -4,6 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Routes from "./Routes";
 import TokenManager from "./TokenManager";
 import ErrorAlert from "./components/error-alert/ErrorAlert";
+import * as Sentry from "@sentry/react";
 
 const App = () => {
   return (
@@ -30,4 +31,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Sentry.withProfiler(App);

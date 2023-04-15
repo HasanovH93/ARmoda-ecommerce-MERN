@@ -19,3 +19,12 @@ export const tagsList = [
   "baby",
   "kids",
 ];
+
+export const sizeOptions = ["x", "m", "xxl", "s", "xxxl", "xs"];
+export const colorOptions = [
+  { value: "red", label: "Red" },
+  { value: "blue", label: "Blue" },
+  { value: "green", label: "Green" },
+  { value: "black", label: "Black" },
+  { value: "white", label: "White" },
+];

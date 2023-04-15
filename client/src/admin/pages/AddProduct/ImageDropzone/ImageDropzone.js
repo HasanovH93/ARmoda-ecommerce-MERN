@@ -2,29 +2,22 @@ import React, { useState } from "react";
 import { Row, Col, Form } from "react-bootstrap";
 import { FiUpload } from "react-icons/fi";
 import { BsTrash } from "react-icons/bs";
+import useHandleInputChange from "../../../hooks/HandleInputChange";
 import styles from "./ImageDropzone.module.scss";
 
 const ImageDropzone = ({ product, setProduct }) => {
   const [acceptedFiles, setAcceptedFiles] = useState([]);
   const [uploadedImages, setUploadedImages] = useState([]);
 
-  const handleFilesChange = (event) => {
-    const newAcceptedFiles = [...event.target.files];
-
-    setAcceptedFiles((prevFiles) => [...prevFiles, ...newAcceptedFiles]);
-
-    setProduct((prevProduct) => {
-      return {
-        ...prevProduct,
-        files: [...prevProduct.files, ...newAcceptedFiles],
-      };
-    });
-
-    setUploadedImages((prevImages) => [
-      ...prevImages,
-      ...newAcceptedFiles.map((file) => URL.createObjectURL(file)),
-    ]);
-  };
+  const handleInputChange = useHandleInputChange(
+    product,
+    setProduct,
+    null,
+    null,
+    null,
+    setAcceptedFiles,
+    setUploadedImages
+  );
 
   const removeImage = (index) => {
     setAcceptedFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
@@ -52,7 +45,7 @@ const ImageDropzone = ({ product, setProduct }) => {
                 type="file"
                 accept="image/*"
                 multiple
-                onChange={handleFilesChange}
+                onChange={(event) => handleInputChange("files", event)}
               />
             </div>
           </Form.Group>
