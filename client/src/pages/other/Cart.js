@@ -1,4 +1,5 @@
 import { Fragment, useState } from "react";
+import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import SEO from "../../components/seo";
@@ -12,6 +13,7 @@ import {
   deleteAllFromCart,
 } from "../../store/slices/cart-slice";
 import { cartItemStock } from "../../helpers/product";
+import Voucher from "./components/Voucher";
 
 const Cart = () => {
   let cartTotalPrice = 0;
@@ -19,10 +21,42 @@ const Cart = () => {
   const [quantityCount] = useState(1);
   const dispatch = useDispatch();
   let { pathname } = useLocation();
-
+  const [voucherCode, setVoucherCode] = useState("");
+  const [discountPercentage, setDiscountPercentage] = useState(0);
   const currency = useSelector((state) => state.currency);
   const { cartItems } = useSelector((state) => state.cart);
 
+  const handleVoucherSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3030/orders/apply-voucher",
+        {
+          voucherCode,
+        }
+      );
+
+      console.log(response);
+
+      if (response.data.isValid) {
+        // Apply the discount percentage (e.g., 10%)
+        setDiscountPercentage(10);
+      } else {
+        // Reset the discount percentage if the voucher code is not valid
+        setDiscountPercentage(0);
+      }
+    } catch (error) {
+      console.error("Error validating voucher code:", error);
+      setDiscountPercentage(0);
+    }
+  };
+
+  console.log("cartTotalPrice:", cartTotalPrice);
+  console.log("discountPercentage:", discountPercentage);
+
+  const discountedCartTotal =
+    cartTotalPrice - (cartTotalPrice * discountPercentage) / 100;
   return (
     <Fragment>
       <SEO titleTemplate="Cart" description="Cart page of Armoda" />
@@ -72,6 +106,11 @@ const Cart = () => {
                                   finalDiscountedPrice * cartItem.quantity)
                               : (cartTotalPrice +=
                                   finalProductPrice * cartItem.quantity);
+                            console.log("Current cartItem:", cartItem);
+                            console.log(
+                              "Current cartTotalPrice:",
+                              cartTotalPrice
+                            );
                             return (
                               <tr key={key}>
                                 <td className="product-thumbnail">
@@ -245,24 +284,11 @@ const Cart = () => {
                     </div>
                   </div>
 
-                  <div className="col-lg-4 col-md-6">
-                    <div className="discount-code-wrapper">
-                      <div className="title-wrap">
-                        <h4 className="cart-bottom-title section-bg-gray">
-                          Use Coupon Code
-                        </h4>
-                      </div>
-                      <div className="discount-code">
-                        <p>Enter your coupon code if you have one.</p>
-                        <form>
-                          <input type="text" required name="name" />
-                          <button className="cart-btn-2" type="submit">
-                            Apply Coupon
-                          </button>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
+                  <Voucher
+                    voucherCode={voucherCode}
+                    onVoucherSubmit={handleVoucherSubmit}
+                    setVoucherCode={setVoucherCode}
+                  />
 
                   <div className="col-lg-4 col-md-12">
                     <div className="grand-totall">
@@ -284,7 +310,8 @@ const Cart = () => {
                       <h4 className="grand-totall-title">
                         Grand Total{" "}
                         <span>
-                          {currency.currencySymbol + cartTotalPrice.toFixed(2)}
+                          {currency.currencySymbol +
+                            (discountedCartTotal + 5.0).toFixed(2)}
                         </span>
                       </h4>
                       <Link to={process.env.PUBLIC_URL + "/checkout"}>

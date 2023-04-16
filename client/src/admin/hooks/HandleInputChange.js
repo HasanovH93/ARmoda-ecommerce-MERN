@@ -11,9 +11,7 @@ const useHandleInputChange = (
 ) => {
   const handleInputChange = useCallback(
     (type, ...args) => {
-      console.log(type);
       if (type === "variations") {
-        console.log("here ");
         const [index, field, value, checked] = args;
 
         setVariations((prevVariations) => {

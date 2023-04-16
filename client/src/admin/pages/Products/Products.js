@@ -9,7 +9,6 @@ const ProductPage = () => {
   const products = useSelector((state) => state.product.products);
   const sidebarOpen = useSelector((state) => state.sidebar.sidebarOpen);
 
-  console.log("Products", sidebarOpen);
 
   useEffect(() => {
     dispatch(fetchProducts());

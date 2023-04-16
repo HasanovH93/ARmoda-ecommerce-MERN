@@ -20,7 +20,7 @@ export const tagsList = [
   "kids",
 ];
 
-export const sizeOptions = ["x", "m", "xxl", "s", "xxxl", "xs"];
+export const sizeOptions = ["x", "m", "xxl", "s", "xs"];
 export const colorOptions = [
   { value: "red", label: "Red" },
   { value: "blue", label: "Blue" },

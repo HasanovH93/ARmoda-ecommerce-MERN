@@ -14,10 +14,6 @@ const adminRoutes = [
         path: "add-product",
         element: <AddProduct />,
       },
-      {
-        path: "all-products",
-        element: <ProductList />,
-      },
     ],
   },
   {

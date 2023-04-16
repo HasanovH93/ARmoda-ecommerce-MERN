@@ -1,11 +1,10 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
-import * as Sentry from "@sentry/react";
 import App from "./App";
 import { store } from "./store/store";
 import PersistProvider from "./store/providers/persist-provider";
-import { setProducts } from "./store/slices/product-slice";
+import { fetchProducts } from "./store/slices/product-slice";
 import "animate.css";
 import "swiper/swiper-bundle.min.css";
 import "yet-another-react-lightbox/styles.css";
@@ -13,21 +12,13 @@ import "yet-another-react-lightbox/plugins/thumbnails.css";
 import "./assets/scss/style.scss";
 import "./i18n";
 
-import { fetchAllProducts } from "./api";
-
 const renderApp = async () => {
   try {
-    const products = await fetchAllProducts();
-    store.dispatch(setProducts(products));
+    await store.dispatch(fetchProducts());
   } catch (error) {
     console.error("Error fetching products:", error);
   }
 
-  Sentry.init({
-    dsn: "https://73d7c0e10d0445d9b2f6871fd2893b8c@o4505018355220480.ingest.sentry.io/4505018356334592",
-    integrations: [new Sentry.BrowserTracing()],
-    tracesSampleRate: 1.0,
-  });
 
   const container = document.getElementById("root");
   const root = createRoot(container);
